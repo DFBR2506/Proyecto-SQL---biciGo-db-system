@@ -395,7 +395,7 @@ CREATE TABLE personas (
 
 CREATE TABLE roles (
     id_rol INT IDENTITY (1,1) PRIMARY KEY,
-    nombre_tipo VARCHAR (60) NOT NULL UNIQUE,
+    nombre VARCHAR (60) NOT NULL UNIQUE,
 );
 
 CREATE TABLE roles_de_las_personas (

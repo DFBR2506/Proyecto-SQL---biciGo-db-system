@@ -476,7 +476,7 @@ CREATE TABLE estados_de_disponibilidad_de_los_guias (
 CREATE TABLE guias (
     id_persona INT PRIMARY KEY,  -- El gu a es una persona (1 a 1 con Personas)
     anios_de_experiencia INT NOT NULL CHECK (anios_de_experiencia >= 0),
-    numero_de_tarjeta_profesional INT NOT NULL UNIQUE,
+    numero_de_tarjeta_profesional VARCHAR(20) NOT NULL UNIQUE,
     activo BIT NOT NULL DEFAULT 1,
 
     CONSTRAINT FK_Guias_Persona FOREIGN KEY (id_persona)

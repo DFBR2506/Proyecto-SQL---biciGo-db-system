@@ -656,7 +656,7 @@ CREATE TABLE alquileres (
 CREATE TABLE estados_de_los_alquileres (
     id_estado_del_alquiler INT IDENTITY(1,1) PRIMARY KEY,
     nombre VARCHAR(30) UNIQUE,
-    descripcion VARCHAR (50) NULL
+    descripcion VARCHAR (100) NULL
 );
 
 CREATE TABLE estados_tomados_por_los_alquileres (

@@ -419,7 +419,7 @@ CREATE TABLE politicas (
     CONSTRAINT CHK_politicas_version CHECK (version_de_los_terminos > 0)
 );
 
-CREATE TABLE aceptacion_de_las_politicas (
+CREATE TABLE aceptaciones_de_las_politicas (
     id_aceptacion_de_las_politicas INT IDENTITY(1,1) PRIMARY KEY,
     id_persona INT NOT NULL,
     id_politica INT NOT NULL,

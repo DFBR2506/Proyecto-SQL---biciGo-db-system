@@ -415,7 +415,7 @@ CREATE TABLE politicas (
     id_politica INT IDENTITY(1,1) PRIMARY KEY,
     version_de_los_terminos INT NOT NULL,
     fecha_de_creacion DATE DEFAULT GETDATE(),
-    url_politica VARCHAR UNIQUE,
+    url_politica VARCHAR(255) UNIQUE,
     CONSTRAINT CHK_politicas_version CHECK (version_de_los_terminos > 0)
 );
 

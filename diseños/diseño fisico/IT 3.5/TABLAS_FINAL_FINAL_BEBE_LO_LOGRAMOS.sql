@@ -835,15 +835,20 @@ CREATE TABLE estados_tomados_por_los_recorridos (
 CREATE TABLE comentarios (
     id_comentario INT IDENTITY(1,1) PRIMARY KEY,
     id_persona INT NOT NULL,
+    id_comentable INT NOT NULL,   
     calificacion INT NOT NULL,
     descripcion VARCHAR(1000) NULL,
     fecha_de_creacion DATE NOT NULL DEFAULT GETDATE(),
     visible BIT NOT NULL DEFAULT 1,
     CONSTRAINT CHK_comentarios_calificacion CHECK (calificacion BETWEEN 0 AND 5),
     CONSTRAINT CHK_comentarios_descripcion CHECK (descripcion IS NULL OR LTRIM(RTRIM(descripcion)) <> ''),
-    CONSTRAINT FK_comentarios_usuario FOREIGN KEY (id_persona)
+    CONSTRAINT FK_comentarios_persona FOREIGN KEY (id_persona)
         REFERENCES usuarios(id_persona)
         ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT FK_comentarios_comentable FOREIGN KEY (id_comentable)
+        REFERENCES comentables(id_comentable)
+        ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
 
@@ -870,33 +875,29 @@ CREATE TABLE etiquetas_del_comentario (
 );
 
 CREATE TABLE comentables (
-    id_comentario INT NOT NULL,
-    nombre VARCHAR(100) NOT NULL,
-    CONSTRAINT PK_comentable PRIMARY KEY(id_comentario),
-    CONSTRAINT FK_comentable FOREIGN KEY (id_comentario)
-    REFERENCES comentarios(id_comentario)
-    ON UPDATE CASCADE ON DELETE CASCADE
-
+    id_comentable INT IDENTITY(1,1) PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL UNIQUE, 
+    CONSTRAINT CHK_comentables_nombre CHECK (TRIM(nombre) <> '')
 );
 
 -- ====== (8) PK compuesta -> PK propia + UNIQUE
 CREATE TABLE comentarios_de_las_bicicletas (
-    id_comentario_de_la_bicicleta INT IDENTITY(1,1) PRIMARY KEY,
-    id_comentario INT NOT NULL,
+    id_comentario INT PRIMARY KEY,
     id_bicicleta INT NOT NULL,
-    CONSTRAINT UQ_comentarios_bicicletas UNIQUE (id_comentario, id_bicicleta),
-    CONSTRAINT FK_comentarios_bicicletas_comentario 
-    FOREIGN KEY (id_comentario) REFERENCES comentarios(id_comentario),
-    CONSTRAINT FK_comentarios_bicicletas 
-    FOREIGN KEY (id_bicicleta) REFERENCES bicicletas(id_bicicleta)
+    CONSTRAINT FK_comentarios_bicicletas_comentario FOREIGN KEY (id_comentario)
+        REFERENCES comentarios(id_comentario)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT FK_comentarios_bicicletas FOREIGN KEY (id_bicicleta) 
+        REFERENCES bicicletas(id_bicicleta)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 -- ====== (9) PK compuesta -> PK propia + UNIQUE
 CREATE TABLE comentarios_de_las_rutas_turisticas (
-    id_comentario_de_la_ruta_turistica INT IDENTITY(1,1) PRIMARY KEY,
-    id_comentario INT NOT NULL,
+    id_comentario INT PRIMARY KEY,
     id_ruta_turistica INT NOT NULL,
-    CONSTRAINT UQ_comentarios_rutas_turisticas UNIQUE (id_comentario, id_ruta_turistica),
     CONSTRAINT FK_comentarios_rutas FOREIGN KEY (id_comentario)
         REFERENCES comentarios(id_comentario)
         ON UPDATE CASCADE
@@ -909,10 +910,8 @@ CREATE TABLE comentarios_de_las_rutas_turisticas (
 
 -- ====== (10) PK compuesta -> PK propia + UNIQUE
 CREATE TABLE comentarios_de_los_guias (
-    id_comentario_del_guia INT IDENTITY(1,1) PRIMARY KEY,
-    id_comentario INT NOT NULL,
+    id_comentario INT PRIMARY KEY,
     id_guia INT NOT NULL,
-    CONSTRAINT UQ_comentarios_guias UNIQUE (id_comentario, id_guia),
     CONSTRAINT FK_comentarios_guias_comentarios FOREIGN KEY (id_comentario)
         REFERENCES comentarios(id_comentario)
         ON UPDATE CASCADE
@@ -953,16 +952,14 @@ CREATE TABLE archivos_multimedia (
 
 -- ====== (11) PK compuesta -> PK propia + UNIQUE
 CREATE TABLE archivos_multimedia_de_las_bicicletas(
-    id_archivo_multimedia_de_la_bicicleta INT IDENTITY(1,1) PRIMARY KEY,
-    id_archivo_multimedia INT NOT NULL,
+    id_archivo_multimedia INT PRIMARY KEY,
     id_bicicleta INT NOT NULL,
-    CONSTRAINT UQ_archivos_de_las_bicis UNIQUE(id_archivo_multimedia,id_bicicleta),
     CONSTRAINT FK_archivo_multimedia FOREIGN KEY(id_archivo_multimedia) REFERENCES archivos_multimedia(id_archivo_multimedia)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE,
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT FK_BICI FOREIGN KEY(id_bicicleta) REFERENCES bicicletas(id_bicicleta)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 -- ====== (12) PK compuesta -> PK propia + UNIQUE

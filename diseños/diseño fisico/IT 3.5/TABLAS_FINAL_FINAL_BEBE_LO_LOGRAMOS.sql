@@ -448,7 +448,6 @@ CREATE TABLE usuarios (
     id_persona INT  PRIMARY KEY,
     contrasena VARBINARY(64) NOT NULL,
     id_preferencia INT NULL,
-    id_politica INT NULL,
     activo BIT NOT NULL DEFAULT 1,
     CONSTRAINT FK_usuarios_preferencia FOREIGN KEY (id_preferencia)
         REFERENCES preferencias_de_los_usuarios(id_preferencia)

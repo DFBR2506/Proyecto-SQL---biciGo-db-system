@@ -456,11 +456,7 @@ CREATE TABLE usuarios (
         CONSTRAINT FK_usuarios_Persona FOREIGN KEY (id_persona)
         REFERENCES personas (id_persona)
         ON UPDATE CASCADE 
-        ON DELETE CASCADE,
-    CONSTRAINT FK_usuarios_politica FOREIGN KEY (id_politica)
-        REFERENCES politicas(id_politica)
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE CASCADE
 );
 
 CREATE TABLE estados_de_disponibilidad_de_los_guias (

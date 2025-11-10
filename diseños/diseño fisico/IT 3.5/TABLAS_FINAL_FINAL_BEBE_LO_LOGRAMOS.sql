@@ -798,7 +798,7 @@ CREATE TABLE estados_tomados_por_las_participaciones (
         ON DELETE CASCADE,
      CONSTRAINT CHK_CHECK2ER  CHECK (
     fecha_fin_del_estado IS NULL 
-    OR fecha_fin_del_estado > fecha_inicio_del_estado)
+    OR fecha_fin_del_estado >= fecha_inicio_del_estado)
 );
 
 
@@ -824,7 +824,7 @@ CREATE TABLE estados_tomados_por_los_recorridos (
         ON DELETE CASCADE,
     CONSTRAINT CHK_CHECK1ERR  CHECK (
     fecha_fin_del_estado IS NULL 
-    OR fecha_fin_del_estado > fecha_inicio_del_estado)
+    OR fecha_fin_del_estado >= fecha_inicio_del_estado)
 );
 
 

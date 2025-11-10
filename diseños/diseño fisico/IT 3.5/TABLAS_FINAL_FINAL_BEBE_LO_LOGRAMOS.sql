@@ -649,7 +649,7 @@ CREATE TABLE alquileres (
         REFERENCES metodos_de_pago(id_metodo_pago)
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
-    CONSTRAINT CHK_alquileres_fechas CHECK (fecha_de_inicio_de_vigencia < fecha_de_fin_de_vigencia)
+    CONSTRAINT CHK_alquileres_fechas CHECK (fecha_de_inicio_de_vigencia <= fecha_de_fin_de_vigencia)
 
 );
 
@@ -664,7 +664,7 @@ CREATE TABLE estados_tomados_por_los_alquileres (
     id_estado_del_alquiler INT NOT NULL,
     id_alquiler INT NOT NULL,
     fecha_inicio_del_estado DATE NOT NULL DEFAULT GETDATE(),
-       fecha_fin_del_estado DATE NULL,
+    fecha_fin_del_estado DATE NULL,
     CONSTRAINT PK_primary_key PRIMARY KEY (id_estado_tomado_por_el_alquiler),
     CONSTRAINT FK_foreign_key_1 FOREIGN KEY (id_estado_del_alquiler) REFERENCES 
     estados_de_los_alquileres (id_estado_del_alquiler)
@@ -676,7 +676,7 @@ CREATE TABLE estados_tomados_por_los_alquileres (
     ON DELETE NO ACTION,
      CONSTRAINT CHK_CHECK1EA CHECK (
     fecha_fin_del_estado IS NULL 
-    OR fecha_fin_del_estado > fecha_inicio_del_estado)
+    OR fecha_fin_del_estado >= fecha_inicio_del_estado)
 );
 
 

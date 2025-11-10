@@ -87,7 +87,7 @@ CREATE TABLE seguros (
 -- ========================
 CREATE TABLE condiciones_especiales (
     id_condicion_especial INT IDENTITY(1,1) PRIMARY KEY,
-    nombre VARCHAR(30) UNIQUE NOT NULL,
+    nombre VARCHAR(60) UNIQUE NOT NULL,
     descripcion VARCHAR(100) NOT NULL,
     CONSTRAINT CHK_condiciones_especiales_nombre CHECK (TRIM(nombre) <> ''),
     CONSTRAINT CHK_condiciones_especiales_descripcion CHECK (TRIM(descripcion) <> '')

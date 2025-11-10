@@ -832,6 +832,12 @@ CREATE TABLE estados_tomados_por_los_recorridos (
 -- ========================
 -- SECCI N: COMENTARIOS, ETIQUETAS Y MULTIMEDIA RELACIONADOS
 -- ========================
+CREATE TABLE comentables (
+    id_comentable INT IDENTITY(1,1) PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL UNIQUE, 
+    CONSTRAINT CHK_comentables_nombre CHECK (TRIM(nombre) <> '')
+);
+
 CREATE TABLE comentarios (
     id_comentario INT IDENTITY(1,1) PRIMARY KEY,
     id_persona INT NOT NULL,
@@ -872,12 +878,6 @@ CREATE TABLE etiquetas_del_comentario (
         REFERENCES etiquetas(id_etiqueta)
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-);
-
-CREATE TABLE comentables (
-    id_comentable INT IDENTITY(1,1) PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL UNIQUE, 
-    CONSTRAINT CHK_comentables_nombre CHECK (TRIM(nombre) <> '')
 );
 
 -- ====== (8) PK compuesta -> PK propia + UNIQUE

@@ -1,0 +1,237 @@
+
+-- ======================================
+--  SECCIÓN 1: FUNCIONES ESCALARES
+-- ======================================
+
+-- 1. Calcular la edad de una persona
+CREATE OR ALTER FUNCTION fn_CalcularEdadPersona(@fechaNacimiento DATE)
+RETURNS INT
+AS
+BEGIN
+    RETURN DATEDIFF(YEAR, @fechaNacimiento, GETDATE()) 
+           - CASE 
+                WHEN (MONTH(@fechaNacimiento) > MONTH(GETDATE()) 
+                  OR (MONTH(@fechaNacimiento) = MONTH(GETDATE()) 
+                  AND DAY(@fechaNacimiento) > DAY(GETDATE())))
+                THEN 1 ELSE 0 
+             END;
+END;
+GO
+
+-- 2. Obtener duracion recorrido horas --
+CREATE FUNCTION fn_ObtenerDuracionRecorridoHoras (@IDRecorrido INT)
+RETURNS DECIMAL(5, 2)
+AS
+BEGIN
+    DECLARE @DuracionMinutos INT;
+    DECLARE @HoraInicio TIME;
+    DECLARE @HoraFin TIME;
+
+    SELECT 
+        @HoraInicio = hora_de_inicio,
+        @HoraFin = hora_de_finalizacion
+    FROM 
+        recorridos
+    WHERE 
+        id_recorrido = @IDRecorrido;
+
+
+    SET @DuracionMinutos = DATEDIFF(MINUTE, @HoraInicio, @HoraFin);
+
+    RETURN ISNULL(CAST(@DuracionMinutos AS DECIMAL(5, 2)) / 60.0, 0.00);
+END;
+
+-- 3. Calcular ingreso total del recorrido --
+CREATE FUNCTION fn_CalcularIngresoTotalRecorrido (@IDRecorrido INT)
+RETURNS DECIMAL(10, 2)
+AS
+BEGIN
+    DECLARE @IngresoTotal DECIMAL(10, 2);
+
+
+    SELECT 
+        @IngresoTotal = SUM(tarifa_pagada)
+    FROM 
+        participaciones
+    WHERE 
+        id_recorrido = @IDRecorrido;
+
+    RETURN ISNULL(@IngresoTotal, 0.00);
+END;
+
+-- 4. Reportes Abiertos --
+CREATE FUNCTION fn_ContarReportesAbiertosBicicleta (@IDBicicleta INT)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @ReportesAbiertos INT;
+
+    SELECT @ReportesAbiertos = COUNT(DISTINCT r.id_reporte)
+    FROM reportes r
+    JOIN estados_tomados_por_los_reportes etr 
+        ON r.id_reporte = etr.id_reporte
+    WHERE 
+        r.id_bicicleta = @IDBicicleta
+      
+        AND etr.fecha_fin_del_estado IS NULL
+     
+        AND etr.id_estado_del_reporte <> 4;
+
+    RETURN ISNULL(@ReportesAbiertos, 0);
+END;
+
+-- 5. Participantes Recorridos--
+CREATE FUNCTION fn_ContarParticipantesRecorrido (@IDRecorrido INT)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @TotalParticipantes INT;
+
+    SELECT @TotalParticipantes = COUNT(*)
+    FROM participaciones
+    WHERE id_recorrido = @IDRecorrido;
+
+    RETURN ISNULL(@TotalParticipantes, 0);
+END;
+
+
+
+-- 6. Calcular tarifa con descuento aplicado
+CREATE OR ALTER FUNCTION fn_TarifaConDescuento(
+    @tarifaBase DECIMAL(10,2), 
+    @porcentajeDescuento DECIMAL(5,2)
+)
+RETURNS DECIMAL(10,2)
+AS
+BEGIN
+    RETURN @tarifaBase * (1 - @porcentajeDescuento / 100);
+END;
+GO
+
+-- 7. Calcular duración en días entre dos fechas
+CREATE OR ALTER FUNCTION fn_CalcularDuracionDias(@inicio DATE, @fin DATE)
+RETURNS INT
+AS
+BEGIN
+    RETURN DATEDIFF(DAY, @inicio, @fin);
+END;
+GO
+
+-- 8. Obtener el estado actual de una bicicleta
+CREATE OR ALTER FUNCTION fn_EstadoActualBicicleta(@id_bicicleta INT)
+RETURNS VARCHAR(100)
+AS
+BEGIN
+    DECLARE @estado VARCHAR(100);
+
+    SELECT TOP 1 @estado = ed.nombre
+    FROM disponibilidades_tomadas_por_las_bicicletas db
+    JOIN estados_de_disponibilidad_de_las_bicicletas ed 
+        ON ed.id_estado_de_disponibilidad_de_la_bicicleta = db.id_estado_de_disponibilidad_de_la_bicicleta
+    WHERE db.id_bicicleta = @id_bicicleta
+    ORDER BY db.fecha_inicio_del_estado DESC;
+
+    RETURN @estado;
+END;
+GO
+
+-- ======================================
+--  SECCIÓN 2: FUNCIONES DE TABLA
+-- ======================================
+
+-- 9. Bicicletas disponibles por ciudad
+CREATE OR ALTER FUNCTION fn_BicicletasDisponiblesPorCiudad(@nombreCiudad VARCHAR(100))
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        b.id_bicicleta, 
+        b.modelo, 
+        m.nombre AS marca, 
+        pa.nombre AS punto_alquiler
+    FROM bicicletas b
+    JOIN marcas m ON b.id_marca = m.id_marca
+    JOIN puntos_de_alquiler pa ON pa.id_punto_alquiler = b.id_punto_de_alquiler
+    JOIN ciudades c ON pa.id_ciudad = c.id_ciudad
+    WHERE c.nombre = @nombreCiudad AND b.activo = 1
+);
+GO
+
+-- 10. Historial de mantenimientos de una bicicleta
+CREATE OR ALTER FUNCTION fn_HistorialMantenimientosBicicleta(@id_bicicleta INT)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        m.descripcion, 
+        tm.nombre AS tipo_mantenimiento, 
+        m.fecha_de_inicio, 
+        m.fecha_de_fin
+    FROM mantenimientos m
+    JOIN tipos_de_mantenimiento tm 
+        ON m.id_tipo_de_mantenimiento = tm.id_tipo_de_mantenimiento
+    WHERE m.id_bicicleta = @id_bicicleta
+    ORDER BY m.fecha_de_inicio DESC
+);
+GO
+
+-- 11. Alquileres activos por usuario
+CREATE OR ALTER FUNCTION fn_AlquileresActivosPorUsuario(@id_usuario INT)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        a.id_alquiler, 
+        b.modelo, 
+        a.fecha_de_inicio_de_vigencia, 
+        a.fecha_de_fin_de_vigencia, 
+        a.tarifa_total
+    FROM alquileres a
+    JOIN bicicletas b ON a.id_bicicleta = b.id_bicicleta
+    WHERE a.id_usuario = @id_usuario
+      AND GETDATE() BETWEEN a.fecha_de_inicio_de_vigencia AND a.fecha_de_fin_de_vigencia
+);
+GO
+
+-- ======================================
+-- SECCIÓN 3: CONSULTAS DE AGREGACIÓN
+-- ======================================
+
+-- 12. Promedio de duración de los alquileres (en días)
+SELECT 
+    AVG(DATEDIFF(DAY, fecha_de_inicio_de_vigencia, fecha_de_fin_de_vigencia)) AS PromedioDiasAlquiler
+FROM alquileres;
+GO
+
+-- 13. Total de bicicletas activas por ciudad
+SELECT 
+    c.nombre AS Ciudad, 
+    COUNT(*) AS TotalBicicletas
+FROM bicicletas b
+JOIN puntos_de_alquiler p ON b.id_punto_de_alquiler = p.id_punto_alquiler
+JOIN ciudades c ON p.id_ciudad = c.id_ciudad
+WHERE b.activo = 1
+GROUP BY c.nombre;
+GO
+
+-- 14. Promedio de tarifa por tipo de plan
+SELECT 
+    tipo_de_plan, 
+    AVG(tarifa_asociada) AS PromedioTarifa
+FROM planes_de_los_alquileres
+GROUP BY tipo_de_plan;
+GO
+
+-- 15. Total recaudado por ciudad
+SELECT 
+    c.nombre AS Ciudad, 
+    SUM(a.tarifa_total) AS TotalRecaudado
+FROM alquileres a
+JOIN bicicletas b ON a.id_bicicleta = b.id_bicicleta
+JOIN puntos_de_alquiler p ON b.id_punto_de_alquiler = p.id_punto_alquiler
+JOIN ciudades c ON p.id_ciudad = c.id_ciudad
+GROUP BY c.nombre;
+GO

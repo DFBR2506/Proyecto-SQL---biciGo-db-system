@@ -993,7 +993,7 @@ INSERT INTO estados_fisicos_tomados_por_las_bicicletas (id_estado_fisico_bicicle
 (1,99,'2025-01-19','2025-01-23'),(2,99,'2025-01-24','2025-01-27'),(3,99,'2025-01-28',NULL);
 
 -- accesorios_de_la_bicicleta
-INSERT INTO accesorios_de_la_bicicleta (id_bicicleta, id_accesorio) VALUES
+INSERT INTO accesorios_de_las_bicicletas (id_bicicleta, id_accesorio) VALUES
 (1, 1), (1, 2), (1, 4),
 (2, 1), (2, 3), (2, 4),
 (3, 1), (3, 7), (3, 14),

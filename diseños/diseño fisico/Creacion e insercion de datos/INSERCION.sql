@@ -2,51 +2,51 @@
 INSERT INTO departamentos (nombre) VALUES
 ('Antioquia'),
 ('Cundinamarca'),
-('BolÌvar'),
+('Bol√≠var'),
 ('Magdalena'),
 ('Valle del Cauca'),
-('Atl·ntico'),
+('Atl√°ntico'),
 ('Santander'),
-('Boyac·'),
-('NariÒo'),
+('Boyac√°'),
+('Nari√±o'),
 ('Tolima'),
 ('Cauca'),
 ('Risaralda'),
 ('Caldas'),
-('QuindÌo'),
+('Quind√≠o'),
 ('Meta'),
 ('Cesar'),
 ('Sucre'),
 ('Huila'),
 ('La Guajira'),
 ('Norte de Santander'),
-('ChocÛ'),
+('Choc√≥'),
 ('Arauca'),
 ('Casanare'),
 ('Putumayo'),
 ('Guaviare'),
 ('Amazonas'),
-('GuainÌa'),
-('VaupÈs'),
-('San AndrÈs y Providencia'),
-('Caquet·');
+('Guain√≠a'),
+('Vaup√©s'),
+('San Andr√©s y Providencia'),
+('Caquet√°');
 
 -- ciudades (depende de departamentos: usa ids 1..30 en el orden insertado)
 INSERT INTO ciudades (nombre, id_departamento) VALUES
-('MedellÌn', 1),
+('Medell√≠n', 1),
 ('Envigado', 1),
 ('Bello', 1),
 ('Rionegro', 1),
-('Bogot·', 2),
+('Bogot√°', 2),
 ('Soacha', 2),
-('Zipaquir·', 2),
+('Zipaquir√°', 2),
 ('Cartagena', 3),
-('MaganguÈ', 3),
+('Magangu√©', 3),
 ('Santa Marta', 4),
-('CiÈnaga', 4),
+('Ci√©naga', 4),
 ('Cali', 5),
 ('Palmira', 5),
-('Tulu·', 5),
+('Tulu√°', 5),
 ('Barranquilla', 6),
 ('Soledad', 6),
 ('Bucaramanga', 7),
@@ -57,39 +57,39 @@ INSERT INTO ciudades (nombre, id_departamento) VALUES
 ('Sogamoso', 8),
 ('Pasto', 9),
 ('Ipiales', 9),
-('IbaguÈ', 10),
+('Ibagu√©', 10),
 ('Espinal', 10),
-('Popay·n', 11),
+('Popay√°n', 11),
 ('Pereira', 12),
 ('Dosquebradas', 12),
 ('Manizales', 13),
-('Chinchin·', 13),
+('Chinchin√°', 13),
 ('Armenia', 14),
 ('Villavicencio', 15),
 ('Valledupar', 16),
 ('Sincelejo', 17),
 ('Neiva', 18),
 ('Riohacha', 19),
-('C˙cuta', 20),
-('QuibdÛ', 21),
+('C√∫cuta', 20),
+('Quibd√≥', 21),
 ('Arauca', 22),
 ('Yopal', 23),
 ('Mocoa', 24),
-('San JosÈ del Guaviare', 25),
+('San Jos√© del Guaviare', 25),
 ('Leticia', 26),
-('InÌrida', 27),
-('Mit˙', 28),
-('San AndrÈs', 29),
+('In√≠rida', 27),
+('Mit√∫', 28),
+('San Andr√©s', 29),
 ('Florencia', 30);
 
 -- tipos_de_uso
 INSERT INTO tipos_de_uso (nombre, descripcion) VALUES
 ('Urbano', 'Uso en entornos citadinos, ideal para recorridos cortos y pavimentados.'),
-('MontaÒa', 'DiseÒado para terrenos irregulares, subidas y descensos.'),
+('Monta√±a', 'Dise√±ado para terrenos irregulares, subidas y descensos.'),
 ('Ruta', 'Optimizado para velocidad y recorridos largos sobre asfalto.'),
-('Turismo', 'Pensado para recorridos turÌsticos guiados o autÛnomos.'),
-('HÌbrido', 'CombinaciÛn de caracterÌsticas de ruta y montaÒa.'),
-('ElÈctrico urbano', 'Bicicleta elÈctrica diseÒada para desplazamientos en ciudad.'),
+('Turismo', 'Pensado para recorridos tur√≠sticos guiados o aut√≥nomos.'),
+('H√≠brido', 'Combinaci√≥n de caracter√≠sticas de ruta y monta√±a.'),
+('El√©ctrico urbano', 'Bicicleta el√©ctrica dise√±ada para desplazamientos en ciudad.'),
 ('Recreativo', 'Para uso ocasional y de ocio, rutas cortas.'),
 ('Profesional', 'Para ciclistas experimentados o de competencia.'),
 ('Transporte', 'Uso cotidiano para desplazamiento personal o laboral.'),
@@ -112,18 +112,18 @@ INSERT INTO accesorios (nombre) VALUES
 ('Espejo retrovisor'),
 ('GPS tracker'),
 ('Kit de herramientas'),
-('BombÌn'),
+('Bomb√≠n'),
 ('Paral'),
 ('Guardabarros'),
-('Bolsa de sillÌn'),
+('Bolsa de sill√≠n'),
 ('Candado inteligente'),
 ('Linterna frontal'),
-('C·mara deportiva'),
+('C√°mara deportiva'),
 ('Sensor de velocidad'),
 ('Sensor de cadencia'),
 ('Casco con intercom'),
-('Asiento ergonÛmico'),
-('Kit de reparaciÛn'),
+('Asiento ergon√≥mico'),
+('Kit de reparaci√≥n'),
 ('Cargador solar'),
 ('Soporte de botella adicional'),
 ('Bolsa de cuadro'),
@@ -131,12 +131,12 @@ INSERT INTO accesorios (nombre) VALUES
 ('Luz inteligente'),
 ('Pulsera reflectiva'),
 ('Luces de rueda'),
-('Casco aerodin·mico'),
+('Casco aerodin√°mico'),
 ('Gafas deportivas'),
 ('Chaleco con LED'),
-('Guantes t·ctiles'),
+('Guantes t√°ctiles'),
 ('Mochila impermeable'),
-('C·mara trasera'),
+('C√°mara trasera'),
 ('Dispositivo antirrobo GPS'),
 ('Bolsa de manillar'),
 ('Pedales antideslizantes'),
@@ -145,18 +145,18 @@ INSERT INTO accesorios (nombre) VALUES
 ('Rodilleras'),
 ('Coderas'),
 ('Multiherramienta'),
-('Botella tÈrmica'),
+('Botella t√©rmica'),
 ('Soporte GoPro');
 
 -- estados_fisicos_de_las_bicicletas
 INSERT INTO estados_fisicos_de_las_bicicletas (nombre, descripcion) VALUES
 ('Excelente', 'La bicicleta se encuentra en perfectas condiciones, sin fallas ni desgaste notable.'),
 ('Bueno', 'Presenta ligeros signos de uso, pero funciona correctamente.'),
-('Regular', 'Tiene desgaste visible o pequeÒos daÒos que no afectan el uso inmediato.'),
-('DaÒada', 'Presenta fallas mec·nicas o estructurales que impiden su uso.'),
-('Fuera de servicio', 'No se encuentra disponible por daÒos graves o retiro temporal.'),
-('Nueva', 'ReciÈn incorporada al inventario, sin uso previo.'),
-('Descontinuada', 'Modelo retirado del servicio o reemplazado por una versiÛn nueva.');
+('Regular', 'Tiene desgaste visible o peque√±os da√±os que no afectan el uso inmediato.'),
+('Da√±ada', 'Presenta fallas mec√°nicas o estructurales que impiden su uso.'),
+('Fuera de servicio', 'No se encuentra disponible por da√±os graves o retiro temporal.'),
+('Nueva', 'Reci√©n incorporada al inventario, sin uso previo.'),
+('Descontinuada', 'Modelo retirado del servicio o reemplazado por una versi√≥n nueva.');
 
 -- marcas
 INSERT INTO marcas (nombre, eslogan) VALUES
@@ -180,15 +180,15 @@ INSERT INTO marcas (nombre, eslogan) VALUES
 ('Kona', 'Freedom and fun on two wheels.'),
 ('Norco', 'Ride together. Ride further.'),
 ('Oxford', 'Confianza sobre ruedas.'),
-('GW', 'PasiÛn por rodar.'),
-('Venzo', 'DiseÒo y tecnologÌa en movimiento.'),
-('Totem', 'InnovaciÛn sobre ruedas.'),
+('GW', 'Pasi√≥n por rodar.'),
+('Venzo', 'Dise√±o y tecnolog√≠a en movimiento.'),
+('Totem', 'Innovaci√≥n sobre ruedas.'),
 ('Tern', 'Changing mobility for good.'),
 ('Bianchi', 'Passione Celeste.'),
 ('Look', 'Designed for performance.'),
 ('Raleigh', 'Tradition meets innovation.'),
 ('Decathlon Rockrider', 'Tu bici, tu aventura.'),
-('Benotto', 'La pasiÛn por el ciclismo.');
+('Benotto', 'La pasi√≥n por el ciclismo.');
 
 -- empresas_de_seguros
 INSERT INTO empresas_de_seguros (nombre, eslogan) VALUES
@@ -197,60 +197,60 @@ INSERT INTO empresas_de_seguros (nombre, eslogan) VALUES
 ('Mapfre', NULL),
 ('Allianz', 'Tu aliado en la seguridad. '),
 ('Liberty Seguros', 'Los mas seguros de Colombia. '),
-('Seguros BolÌvar', NULL),
+('Seguros Bol√≠var', NULL),
 ('Zurich Seguros', 'Buenos seguros, buenos precios. '),
 ('HDI Seguros', NULL),
-('La Previsora', 'Prevencion total de daÒos'),
+('La Previsora', 'Prevencion total de da√±os'),
 ('BiciProtect', 'Especialistas en seguridad de bicicletas. '),
 ('Andes Seguros', NULL),
-('PacÌfico Seguros', 'Tu seguridad es nuestra paz. '),
+('Pac√≠fico Seguros', 'Tu seguridad es nuestra paz. '),
 ('Rimac Seguros', NULL),
 ('Caribe Asegura', 'La mejor aseguradora de todo el caribe Colombiano. '),
 ('BiciSafe', NULL);
 
 -- seguros (depende de empresas_de_seguros; ids 1..15 en el orden insertado)
 INSERT INTO seguros (tarifa_base, cobertura, maximo_valor_asegurable, id_empresa_de_seguros) VALUES
-(1.20,  'Robo b·sico y daÒos menores', 10000000.00, 1),
-(1.20,  'Robo, daÒos y responsabilidad civil', 15000000.00, 2),
-(1.10,  'Robo total y pÈrdida parcial', 12500000.00, 3),
-(1.25,  'Robo + daÒos catastrÛficos', 20000000.00, 4),
-(1.40,  'Robo, daÒos por accidente y asistencia en ruta', 30000000.00, 5),
-(1.20,  'DaÒos por accidente', 15000000.00, 6),
-(1.15,  'Full cobertura (robo/daÒos/RC)', 16800000.00, 7),
+(1.20,  'Robo b√°sico y da√±os menores', 10000000.00, 1),
+(1.20,  'Robo, da√±os y responsabilidad civil', 15000000.00, 2),
+(1.10,  'Robo total y p√©rdida parcial', 12500000.00, 3),
+(1.25,  'Robo + da√±os catastr√≥ficos', 20000000.00, 4),
+(1.40,  'Robo, da√±os por accidente y asistencia en ruta', 30000000.00, 5),
+(1.20,  'Da√±os por accidente', 15000000.00, 6),
+(1.15,  'Full cobertura (robo/da√±os/RC)', 16800000.00, 7),
 (1.30,  'Robo y asistencia en ruta', 17000000.00, 8),
-(1.20,  'DaÒos menores (marco/llantas)', 10000000.00, 9),
+(1.20,  'Da√±os menores (marco/llantas)', 10000000.00, 9),
 (1.30,  'Robo urbano + candado inteligente', 8000000.00, 10),
 (1.40,  'Robo total + accesorios', 10000000.00, 11),
-(1.10,  'DaÒos por terceros', 18000000.00, 12),
-(1.20,  'PÈrdida total + RC', 21000000.00, 13),
-(1.20,  'Robo + daÒos por clima', 30000000.00, 14),
-(1.15,  'Cobertura b·sica de iniciaciÛn', 35000000.00, 15);
+(1.10,  'Da√±os por terceros', 18000000.00, 12),
+(1.20,  'P√©rdida total + RC', 21000000.00, 13),
+(1.20,  'Robo + da√±os por clima', 30000000.00, 14),
+(1.15,  'Cobertura b√°sica de iniciaci√≥n', 35000000.00, 15);
 
 -- condiciones_especiales
 INSERT INTO condiciones_especiales (nombre, descripcion) VALUES
-('Peso m·ximo 70kg', 'No debe ser utilizada por usuarios que superen los 70 kilogramos.'),
-('Peso m·ximo 90kg', 'Uso restringido a usuarios de peso inferior a 90 kilogramos.'),
-('Peso m·ximo 120kg', 'Estructura no apta para usuarios que excedan los 120 kilogramos.'),
-('No apta para terreno montaÒoso', 'No debe usarse en pendientes pronunciadas ni caminos irregulares.'),
-('No apta para terreno h˙medo', 'Su tracciÛn o frenos no son seguros en superficies mojadas.'),
-('Solo para terreno plano', 'Uso restringido a vÌas pavimentadas y sin desniveles.'),
-('No apta para caminos sin pavimentar', 'No diseÒada para grava, piedra o tierra suelta.'),
-('LÌmite de kilometraje 500km', 'Debe realizar mantenimiento al alcanzar los 500 kilÛmetros.'),
-('LÌmite de uso diario 3h', 'No se recomienda utilizarla m·s de 3 horas continuas por dÌa.'),
+('Peso m√°ximo 70kg', 'No debe ser utilizada por usuarios que superen los 70 kilogramos.'),
+('Peso m√°ximo 90kg', 'Uso restringido a usuarios de peso inferior a 90 kilogramos.'),
+('Peso m√°ximo 120kg', 'Estructura no apta para usuarios que excedan los 120 kilogramos.'),
+('No apta para terreno monta√±oso', 'No debe usarse en pendientes pronunciadas ni caminos irregulares.'),
+('No apta para terreno h√∫medo', 'Su tracci√≥n o frenos no son seguros en superficies mojadas.'),
+('Solo para terreno plano', 'Uso restringido a v√≠as pavimentadas y sin desniveles.'),
+('No apta para caminos sin pavimentar', 'No dise√±ada para grava, piedra o tierra suelta.'),
+('L√≠mite de kilometraje 500km', 'Debe realizar mantenimiento al alcanzar los 500 kil√≥metros.'),
+('L√≠mite de uso diario 3h', 'No se recomienda utilizarla m√°s de 3 horas continuas por d√≠a.'),
 ('No apta para recorridos largos', 'Recomendada solo para trayectos cortos o urbanos.'),
-('Requiere revisiÛn mensual', 'Debe inspeccionarse cada 30 dÌas para garantizar seguridad.'),
-('Sin suspensiÛn', 'No cuenta con suspensiÛn, no apta para terrenos irregulares.'),
+('Requiere revisi√≥n mensual', 'Debe inspeccionarse cada 30 d√≠as para garantizar seguridad.'),
+('Sin suspensi√≥n', 'No cuenta con suspensi√≥n, no apta para terrenos irregulares.'),
 ('No apta para carga pesada', 'No debe transportar accesorios ni peso adicional.'),
-('Sin asistencia elÈctrica', 'No equipada con sistema de pedaleo asistido.'),
+('Sin asistencia el√©ctrica', 'No equipada con sistema de pedaleo asistido.'),
 ('No apta para remolque', 'No debe ser utilizada para tirar de carros o remolques.'),
 ('Solo para adultos', 'No apta para menores de edad.'),
-('Solo para menores', 'TamaÒo y peso adaptados a niÒos, no usar por adultos.'),
-('No apta para doble ocupante', 'DiseÒada para un solo usuario.'),
-('No apta para silla infantil', 'Estructura no compatible con portabebÈs.'),
+('Solo para menores', 'Tama√±o y peso adaptados a ni√±os, no usar por adultos.'),
+('No apta para doble ocupante', 'Dise√±ada para un solo usuario.'),
+('No apta para silla infantil', 'Estructura no compatible con portabeb√©s.'),
 ('No apta para lluvia', 'Sus componentes no son resistentes al agua.'),
 ('No apta para uso nocturno', 'Carece de luces y reflectores reglamentarios.'),
 ('No apta para alta humedad', 'Debe almacenarse en lugares secos.'),
-('No apta para altas temperaturas', 'El sistema elÈctrico puede fallar en climas extremos.');
+('No apta para altas temperaturas', 'El sistema el√©ctrico puede fallar en climas extremos.');
 
 -- dias
 INSERT INTO dias (nombre) VALUES
@@ -265,14 +265,14 @@ INSERT INTO dias (nombre) VALUES
 -- horarios
 INSERT INTO horarios (descripcion) VALUES
 ('Horario normal entre semana: Lunes a Viernes de 08:00 a 18:00'),
-('Horario extendido: Lunes a S·bado de 07:00 a 20:00'),
+('Horario extendido: Lunes a S√°bado de 07:00 a 20:00'),
 ('Horario nocturno: Lunes a Domingo de 18:00 a 23:00'),
-('Horario fin de semana: S·bado y Domingo de 08:00 a 17:00'),
-('Horario 24 horas: AtenciÛn continua todos los dÌas'),
-('Horario medio dÌa: Lunes a Viernes de 12:00 a 14:00'),
+('Horario fin de semana: S√°bado y Domingo de 08:00 a 17:00'),
+('Horario 24 horas: Atenci√≥n continua todos los d√≠as'),
+('Horario medio d√≠a: Lunes a Viernes de 12:00 a 14:00'),
 ('Horario matutino: Lunes a Viernes de 06:00 a 12:00'),
 ('Horario vespertino: Lunes a Viernes de 13:00 a 19:00'),
-('Horario festivo: DÌas festivos de 09:00 a 15:00'),
+('Horario festivo: D√≠as festivos de 09:00 a 15:00'),
 ('Horario reducido: Lunes a Domingo de 09:00 a 13:00');
 
 -- dias_de_los_horarios (usa ids de dias 1..7 y de horarios 1..10)
@@ -283,7 +283,7 @@ INSERT INTO dias_de_los_horarios (id_dia, id_horario, hora_de_apertura, hora_de_
 (3, 1, '08:00', '18:00'),
 (4, 1, '08:00', '18:00'),
 (5, 1, '08:00', '18:00'),
--- Horario extendido (Lunes a S·bado)
+-- Horario extendido (Lunes a S√°bado)
 (1, 2, '07:00', '20:00'),
 (2, 2, '07:00', '20:00'),
 (3, 2, '07:00', '20:00'),
@@ -293,7 +293,7 @@ INSERT INTO dias_de_los_horarios (id_dia, id_horario, hora_de_apertura, hora_de_
 -- Horario fin de semana
 (6, 4, '08:00', '17:00'),
 (7, 4, '08:00', '17:00'),
--- Horario nocturno (todos los dÌas)
+-- Horario nocturno (todos los d√≠as)
 (1, 3, '18:00', '23:00'),
 (2, 3, '18:00', '23:00'),
 (3, 3, '18:00', '23:00'),
@@ -334,117 +334,117 @@ INSERT INTO dias_de_los_horarios (id_dia, id_horario, hora_de_apertura, hora_de_
 
 -- puntos_de_alquiler (requiere ciudades y horarios cargados)
 INSERT INTO puntos_de_alquiler (nombre, id_ciudad, direccion, longitud, latitud, id_horario, activo) VALUES
-('PA MedellÌn Centro',              1,  'Cra 50 #52-30',       -75.5715,  6.2442, 1, 1),
+('PA Medell√≠n Centro',              1,  'Cra 50 #52-30',       -75.5715,  6.2442, 1, 1),
 ('PA Envigado Parque',              2,  'Parque Envigado',     -75.5918,  6.1719, 2, 1),
-('PA Bello EstaciÛn Madera',        3,  'Cl 30 #45-10',        -75.5570,  6.3310, 10, 1),
-('PA Rionegro Llanogrande',         4,  'VÌa Llanogrande',     -75.4188,  6.1230, 4, 1),
-('PA Bogot· Centro',                5,  'Cra 7 #12-15',        -74.0721,  4.6097, 1, 1),
+('PA Bello Estaci√≥n Madera',        3,  'Cl 30 #45-10',        -75.5570,  6.3310, 10, 1),
+('PA Rionegro Llanogrande',         4,  'V√≠a Llanogrande',     -75.4188,  6.1230, 4, 1),
+('PA Bogot√° Centro',                5,  'Cra 7 #12-15',        -74.0721,  4.6097, 1, 1),
 ('PA Soacha San Mateo',             6,  'Av San Mateo',        -74.2144,  4.5869, 2, 1),
-('PA Zipaquir· Catedral Sal',       7,  'Catedral de Sal',     -74.0091,  5.0221, 4, 1),
-('PA Cartagena Centro HistÛrico',   8,  'Calle de la Iglesia', -75.5520, 10.4236, 5, 1),
-('PA MaganguÈ MalecÛn',             9,  'MalecÛn',             -74.7549,  9.2416, 1, 1),
+('PA Zipaquir√° Catedral Sal',       7,  'Catedral de Sal',     -74.0091,  5.0221, 4, 1),
+('PA Cartagena Centro Hist√≥rico',   8,  'Calle de la Iglesia', -75.5520, 10.4236, 5, 1),
+('PA Magangu√© Malec√≥n',             9,  'Malec√≥n',             -74.7549,  9.2416, 1, 1),
 ('PA Santa Marta Rodadero',        10,  'El Rodadero',         -74.2283, 11.2070, 4, 1),
-('PA CiÈnaga Parque Principal',    11,  'Cl 12 #8-10',         -74.2479, 11.0072, 1, 1),
-('PA Cali Bulevar del RÌo',        12,  'Bulevar del RÌo',     -76.5342,  3.4501, 1, 1),
+('PA Ci√©naga Parque Principal',    11,  'Cl 12 #8-10',         -74.2479, 11.0072, 1, 1),
+('PA Cali Bulevar del R√≠o',        12,  'Bulevar del R√≠o',     -76.5342,  3.4501, 1, 1),
 ('PA Palmira Centro',              13,  'Cl 30 #28-15',        -76.3030,  3.5395, 2, 1),
-('PA Tulu· Parque Boyac·',         14,  'Parque Boyac·',       -76.1954,  4.0847, 1, 1),
+('PA Tulu√° Parque Boyac√°',         14,  'Parque Boyac√°',       -76.1954,  4.0847, 1, 1),
 ('PA Barranquilla Prado',          15,  'Cra 54 #70-10',       -74.8000, 11.0041, 2, 1),
 ('PA Soledad Centro',              16,  'Cl 18 #16-30',        -74.7618, 10.9177, 1, 1),
 ('PA Bucaramanga Cabecera',        17,  'Cabecera',            -73.1198,  7.1193, 1, 1),
-('PA San Gil MalecÛn',             18,  'MalecÛn',             -73.1333,  6.5520, 4, 1),
+('PA San Gil Malec√≥n',             18,  'Malec√≥n',             -73.1333,  6.5520, 4, 1),
 ('PA Barrancabermeja Centro',      19,  'Cl 50 #12-30',        -73.8530,  7.0653, 1, 1),
-('PA Tunja Centro',                20,  'Plaza de BolÌvar',    -73.3560,  5.5353, 1, 1);
+('PA Tunja Centro',                20,  'Plaza de Bol√≠var',    -73.3560,  5.5353, 1, 1);
 
 -- estados_de_disponibilidad_de_las_bicicletas
 INSERT INTO estados_de_disponibilidad_de_las_bicicletas (nombre, descripcion) VALUES
-('Disponible', 'La bicicleta est· libre y puede ser alquilada de inmediato.'),
-('Reservada', 'La bicicleta ha sido apartada por un usuario para un alquiler prÛximo.'),
+('Disponible', 'La bicicleta est√° libre y puede ser alquilada de inmediato.'),
+('Reservada', 'La bicicleta ha sido apartada por un usuario para un alquiler pr√≥ximo.'),
 ('En alquiler', 'Actualmente se encuentra en uso por un cliente.'),
-('En mantenimiento', 'La bicicleta est· siendo revisada o reparada, no disponible para uso.'),
+('En mantenimiento', 'La bicicleta est√° siendo revisada o reparada, no disponible para uso.'),
 ('Fuera de servicio', 'Temporalmente retirada por fallas graves o mantenimiento programado.'),
-('Bloqueada', 'No puede ser alquilada por decisiÛn administrativa o por reporte de daÒo.'),
-('En traslado', 'Est· siendo transportada entre puntos de alquiler o talleres.'),
-('En limpieza', 'En proceso de limpieza o desinfecciÛn.'),
+('Bloqueada', 'No puede ser alquilada por decisi√≥n administrativa o por reporte de da√±o.'),
+('En traslado', 'Est√° siendo transportada entre puntos de alquiler o talleres.'),
+('En limpieza', 'En proceso de limpieza o desinfecci√≥n.'),
 ('Dada de baja', 'Removida definitivamente del inventario.');
 
 -- estados_de_los_reportes
 INSERT INTO estados_de_los_reportes (nombre, descripcion) VALUES
-('Pendiente', 'El reporte ha sido recibido y a˙n no revisado.'),
-('En RevisiÛn', 'Personal est· evaluando el reporte.'),
-('En Proceso de SoluciÛn', 'Se trabaja activamente en la resoluciÛn.'),
+('Pendiente', 'El reporte ha sido recibido y a√∫n no revisado.'),
+('En Revisi√≥n', 'Personal est√° evaluando el reporte.'),
+('En Proceso de Soluci√≥n', 'Se trabaja activamente en la resoluci√≥n.'),
 ('Resuelto', 'Incidente solucionado y reporte cerrado.'),
-('No Procede', 'Reporte no cumple criterios para atenciÛn.'),
-('Cancelado por Usuario', 'Usuario retirÛ el reporte.');
+('No Procede', 'Reporte no cumple criterios para atenci√≥n.'),
+('Cancelado por Usuario', 'Usuario retir√≥ el reporte.');
 
 -- estados_de_los_alquileres
 INSERT INTO estados_de_los_alquileres (nombre, descripcion) VALUES
-('Pendiente', 'El alquiler ha sido registrado pero a˙n no iniciado.'),
-('En curso', 'La bicicleta ha sido entregada y el alquiler est· activo.'),
+('Pendiente', 'El alquiler ha sido registrado pero a√∫n no iniciado.'),
+('En curso', 'La bicicleta ha sido entregada y el alquiler est√° activo.'),
 ('Finalizado', 'El alquiler ha concluido correctamente y la bicicleta fue devuelta.'),
-('Cancelado', 'El usuario o el sistema cancelÛ el alquiler antes de su inicio.'),
+('Cancelado', 'El usuario o el sistema cancel√≥ el alquiler antes de su inicio.'),
 ('Atrasado', 'El usuario no ha devuelto la bicicleta en la fecha prevista.'),
 ('Bloqueado', 'El alquiler ha sido suspendido por motivos administrativos.'),
-('En revisiÛn', 'El alquiler est· siendo verificado por inconsistencias.'),
+('En revisi√≥n', 'El alquiler est√° siendo verificado por inconsistencias.'),
 ('Anulado', 'El registro del alquiler fue eliminado o invalidado.');
 
 -- estados_de_disponibilidad_de_los_guias
 INSERT INTO estados_de_disponibilidad_de_los_guias (nombre, descripcion) VALUES
-('Disponible', 'El guÌa est· libre y puede ser asignado a un nuevo recorrido.'),
-('En recorrido', 'Actualmente se encuentra acompaÒando un grupo o cliente.'),
+('Disponible', 'El gu√≠a est√° libre y puede ser asignado a un nuevo recorrido.'),
+('En recorrido', 'Actualmente se encuentra acompa√±ando un grupo o cliente.'),
 ('Reservado', 'Asignado a un recorrido futuro, no disponible por el momento.'),
-('En descanso', 'El guÌa se encuentra fuera de horario laboral.'),
-('En capacitaciÛn', 'Participando en un entrenamiento o curso interno.'),
+('En descanso', 'El gu√≠a se encuentra fuera de horario laboral.'),
+('En capacitaci√≥n', 'Participando en un entrenamiento o curso interno.'),
 ('De baja temporal', 'No disponible temporalmente por motivos personales o administrativos.'),
-('De baja definitiva', 'El guÌa ha sido retirado permanentemente del sistema.'),
+('De baja definitiva', 'El gu√≠a ha sido retirado permanentemente del sistema.'),
 ('En traslado', 'En desplazamiento hacia otro punto de encuentro o ciudad.'),
-('En evaluaciÛn', 'En proceso de revisiÛn de desempeÒo o documentaciÛn.'),
-('Inactivo', 'GuÌa suspendido o sin actividades programadas.');
+('En evaluaci√≥n', 'En proceso de revisi√≥n de desempe√±o o documentaci√≥n.'),
+('Inactivo', 'Gu√≠a suspendido o sin actividades programadas.');
 
 -- idiomas
 INSERT INTO idiomas (nombre, codigo_ISO, codigo_ISO_639_2, codigo_ISO_639_1) VALUES
-('EspaÒol', 'es', 'spa', 'es'),
-('InglÈs', 'en', 'eng', 'en'),
-('Chino mandarÌn', 'zh', 'zho', 'zh'),
+('Espa√±ol', 'es', 'spa', 'es'),
+('Ingl√©s', 'en', 'eng', 'en'),
+('Chino mandar√≠n', 'zh', 'zho', 'zh'),
 ('Hindi', 'hi', 'hin', 'hi'),
-('¡rabe', 'ar', 'ara', 'ar'),
-('PortuguÈs', 'pt', 'por', 'pt'),
+('√Årabe', 'ar', 'ara', 'ar'),
+('Portugu√©s', 'pt', 'por', 'pt'),
 ('Ruso', 'ru', 'rus', 'ru'),
-('JaponÈs', 'ja', 'jpn', 'ja'),
-('Alem·n', 'de', 'deu', 'de'),
+('Japon√©s', 'ja', 'jpn', 'ja'),
+('Alem√°n', 'de', 'deu', 'de'),
 ('Coreano', 'ko', 'kor', 'ko'),
-('FrancÈs', 'fr', 'fra', 'fr'),
+('Franc√©s', 'fr', 'fra', 'fr'),
 ('Turco', 'tr', 'tur', 'tr'),
 ('Vietnamita', 'vi', 'vie', 'vi'),
 ('Italiano', 'it', 'ita', 'it'),
-('TailandÈs', 'th', 'tha', 'th'),
+('Tailand√©s', 'th', 'tha', 'th'),
 ('Polaco', 'pl', 'pol', 'pl'),
 ('Ucraniano', 'uk', 'ukr', 'uk'),
-('NeerlandÈs', 'nl', 'nld', 'nl'),
+('Neerland√©s', 'nl', 'nld', 'nl'),
 ('Indonesio', 'id', 'ind', 'id');
 
 -- tipos_de_mantenimiento
 INSERT INTO tipos_de_mantenimiento (nombre, descripcion) VALUES
-('Preventivo', 'Revisiones periÛdicas para evitar fallas.'),
-('Correctivo', 'ReparaciÛn tras detectar un fallo.'),
-('Predictivo', 'Monitoreo de condiciÛn para anticipar mantenimiento.'),
-('Ajuste', 'Ajustes menores en los componentes mec·nicos.');
+('Preventivo', 'Revisiones peri√≥dicas para evitar fallas.'),
+('Correctivo', 'Reparaci√≥n tras detectar un fallo.'),
+('Predictivo', 'Monitoreo de condici√≥n para anticipar mantenimiento.'),
+('Ajuste', 'Ajustes menores en los componentes mec√°nicos.');
 
 -- sistemas_de_medicion
 INSERT INTO sistemas_de_medicion (nombre) VALUES
-('MÈtrico'),
+('M√©trico'),
 ('Imperial');
 
 -- tipos_de_documento
 INSERT INTO tipos_de_documento (nombre, acronimo) VALUES
-('CÈdula de ciudadanÌa', 'CC'),
+('C√©dula de ciudadan√≠a', 'CC'),
 ('Tarjeta de identidad', 'TI'),
 ('Pasaporte', 'PA'),
-('CÈdula de extranjerÌa', 'CE');
+('C√©dula de extranjer√≠a', 'CE');
 
 -- roles
 INSERT INTO roles(nombre) VALUES
 ('Usuario'),
-('GuÌa');
+('Gu√≠a');
 
 -- politicas
 INSERT INTO politicas (version_de_los_terminos, fecha_de_creacion, url_politica) VALUES
@@ -457,7 +457,7 @@ INSERT INTO politicas (version_de_los_terminos, fecha_de_creacion, url_politica)
 -- metodos_de_pago
 INSERT INTO metodos_de_pago (nombre, es_transferencia, activo) VALUES
 ('Efectivo', 0, 1),
-('Tarjeta de crÈdito', 0, 1),
+('Tarjeta de cr√©dito', 0, 1),
 ('Transferencia bancaria', 1, 1),
 ('PayPal', 1, 1),
 ('Criptomoneda', 1, 0);
@@ -465,49 +465,49 @@ INSERT INTO metodos_de_pago (nombre, es_transferencia, activo) VALUES
 -- planes_de_los_alquileres
 INSERT INTO planes_de_los_alquileres (tipo_de_plan, descripcion, beneficios_especificos, condiciones_especiales, tarifa_asociada, activo) VALUES
 ('Plan por hora', 'Ideal para trayectos cortos.', 'Incluye accesorios basicos.', 'Sin devoluciones.', 1.05, 1),
-('Plan diario', 'Util para turismo y diligencias.', 'Accesorios basicos incluidos y mantenimiento prioritario.', 'Debe devolverse el mismo dÌa. ', 3.80, 1),
+('Plan diario', 'Util para turismo y diligencias.', 'Accesorios basicos incluidos y mantenimiento prioritario.', 'Debe devolverse el mismo d√≠a. ', 3.80, 1),
 ('Plan 3 dias', 'Flexibilidad a mejor precio.', 'Accesorios incluidos y mantenimiento prioritario.', NULL, 7.50, 1),
 ('Plan 5 dias', 'Perfecto para uso en dias laborales.', 'Accesorios incluidos y mantenimiento prioritario.', NULL, 10.00, 1),
-('Plan semanal', 'DuraciÛn y economia a la vez.', 'Accesorios incluidos y mantenimiento prioritario.', NULL, 13.00, 1),
+('Plan semanal', 'Duraci√≥n y economia a la vez.', 'Accesorios incluidos y mantenimiento prioritario.', NULL, 13.00, 1),
 ('Plan mensual', 'Para uso frecuente.', 'Incluye asistencia en ruta.', 'Sin devoluciones.', 24.00, 1),
-('Plan anual', 'La opciÛn mas economica por dia.', 'Descuento por volumen, soporte dedicado y mantenimiento incluido.', 'Cargos por devoluciÛn antes del aÒo.', 130.00, 1);
+('Plan anual', 'La opci√≥n mas economica por dia.', 'Descuento por volumen, soporte dedicado y mantenimiento incluido.', 'Cargos por devoluci√≥n antes del a√±o.', 130.00, 1);
 
 -- puntos_de_interes
 INSERT INTO puntos_de_interes (nombre, longitud, latitud) VALUES
 ('Monserrate', -74.0610, 4.6050),
-('Plaza de BolÌvar', -74.0760, 4.5981),
-('JardÌn Bot·nico JosÈ Celestino Mutis', -74.0935, 4.6585),
-('Parque ArvÌ', -75.5047, 6.2908),
+('Plaza de Bol√≠var', -74.0760, 4.5981),
+('Jard√≠n Bot√°nico Jos√© Celestino Mutis', -74.0935, 4.6585),
+('Parque Arv√≠', -75.5047, 6.2908),
 ('Plaza Botero', -75.5696, 6.2539),
 ('Cerro Nutibara (Pueblito Paisa)', -75.5795, 6.2424),
 ('Ciudad Amurallada', -75.5460, 10.4236),
 ('Castillo San Felipe de Barajas', -75.5412, 10.4231),
 ('Islas del Rosario', -75.8199, 10.1835),
 ('Cristo Rey', -76.5740, 3.4212),
-('ZoolÛgico de Cali', -76.5597, 3.4375),
-('Bulevar del RÌo', -76.5342, 3.4501),
+('Zool√≥gico de Cali', -76.5597, 3.4375),
+('Bulevar del R√≠o', -76.5342, 3.4501),
 ('Parque Tayrona', -74.0934, 11.3073),
 ('Quinta de San Pedro Alejandrino', -74.1945, 11.2419),
 ('Taganga', -74.1888, 11.2702),
 ('Parque Nacional del Chicamocha', -73.0119, 6.6874),
 ('Catedral de la Sagrada Familia', -73.1227, 7.1194),
-('Ecoparque Cerro del SantÌsimo', -73.1250, 7.0703),
+('Ecoparque Cerro del Sant√≠simo', -73.1250, 7.0703),
 ('Puente de los Caballeros de San Gil', -73.1325, 6.5521),
 ('Mirador de Barichara', -73.2253, 6.6330),
 ('Camino Real Barichara - Guane', -73.2192, 6.6214),
-('Parque del CafÈ', -75.7622, 4.5494),
+('Parque del Caf√©', -75.7622, 4.5494),
 ('Valle de Cocora', -75.5075, 4.6372),
-('JardÌn Bot·nico del QuindÌo', -75.7072, 4.5285),
-('CaÒÛn del Chicamocha', -73.0180, 6.7972),
-('Cascada Juan CurÌ', -73.0955, 6.4590),
-('MalecÛn de Leticia', -69.9410, -4.2094),
+('Jard√≠n Bot√°nico del Quind√≠o', -75.7072, 4.5285),
+('Ca√±√≥n del Chicamocha', -73.0180, 6.7972),
+('Cascada Juan Cur√≠', -73.0955, 6.4590),
+('Malec√≥n de Leticia', -69.9410, -4.2094),
 ('Parque Santander (Leticia)', -69.9422, -4.2135),
 ('Johnny Cay', -81.6884, 12.5891),
 ('Hoyo Soplador', -81.7063, 12.5014);
 
 -- niveles_dificultad
 INSERT INTO niveles_dificultad (nombre, descripcion) VALUES
-('Facil', 'Rutas con poco desnivel, aptas para todos los p˙blicos.'),
+('Facil', 'Rutas con poco desnivel, aptas para todos los p√∫blicos.'),
 ('Moderado', 'Rutas con algunos tramos exigentes.'),
 ('Dificil', 'Rutas para ciclistas experimentados con terrenos exigentes.');
 
@@ -566,56 +566,56 @@ INSERT INTO documentos_de_identificacion (numero, id_tipo_de_documento, id_ciuda
 
 -- personas (50) con emails en gmail/hotmail/outlook/yahoo
 INSERT INTO personas (primer_apellido, primer_nombre, fecha_de_nacimiento, email, numero_de_telefono, id_documento_de_identificacion) VALUES
-('MartÌnez', 'Laura', '1990-06-15', 'laura.martinez@gmail.com', '3001111111', 1),
-('GÛmez', 'AndrÈs', '1985-09-20', 'andres.gomez@gmail.com', '3001111112', 2),
-('RÌos', 'Camila', '1992-02-10', 'camila.rios@gmail.com', '3001111113', 3),
+('Mart√≠nez', 'Laura', '1990-06-15', 'laura.martinez@gmail.com', '3001111111', 1),
+('G√≥mez', 'Andr√©s', '1985-09-20', 'andres.gomez@gmail.com', '3001111112', 2),
+('R√≠os', 'Camila', '1992-02-10', 'camila.rios@gmail.com', '3001111113', 3),
 ('Salazar', 'Valentina', '1995-03-22', 'valentina.salazar@gmail.com', '3001111114', 5),
-('Hern·ndez', 'Diego', '1991-07-30', 'diego.hernandez@gmail.com', '3001111115', 6),
-('Torres', 'LucÌa', '1993-08-12', 'lucia.torres@gmail.com', '3001111116', 7),
-('LÛpez', 'Daniela', '1996-10-03', 'daniela.lopez@gmail.com', '3001111117', 9),
-('RodrÌguez', 'Santiago', '1990-02-22', 'santiago.rodriguez@gmail.com', '3001111118', 10),
-('GarcÌa', 'Natalia', '1997-11-14', 'natalia.garcia@gmail.com', '3001111119', 11),
-('PÈrez', 'Mariana', '1993-03-30', 'mariana.perez@gmail.com', '3001111120', 13),
-('CortÈs', 'Laura', '1998-01-09', 'laura.cortes@gmail.com', '3001111121', 15),
-('Reyes', 'Sebasti·n', '1987-12-12', 'sebastian.reyes@gmail.com', '3001111122', 16),
+('Hern√°ndez', 'Diego', '1991-07-30', 'diego.hernandez@gmail.com', '3001111115', 6),
+('Torres', 'Luc√≠a', '1993-08-12', 'lucia.torres@gmail.com', '3001111116', 7),
+('L√≥pez', 'Daniela', '1996-10-03', 'daniela.lopez@gmail.com', '3001111117', 9),
+('Rodr√≠guez', 'Santiago', '1990-02-22', 'santiago.rodriguez@gmail.com', '3001111118', 10),
+('Garc√≠a', 'Natalia', '1997-11-14', 'natalia.garcia@gmail.com', '3001111119', 11),
+('P√©rez', 'Mariana', '1993-03-30', 'mariana.perez@gmail.com', '3001111120', 13),
+('Cort√©s', 'Laura', '1998-01-09', 'laura.cortes@gmail.com', '3001111121', 15),
+('Reyes', 'Sebasti√°n', '1987-12-12', 'sebastian.reyes@gmail.com', '3001111122', 16),
 ('Silva', 'Carolina', '1994-09-01', 'carolina.silva@gmail.com', '3001111123', 17),
-('MejÌa', 'Oscar', '1989-07-28', 'oscar.mejia@gmail.com', '3001111124', 18),
-('JimÈnez', 'Isabella', '1995-05-11', 'isabella.jimenez@gmail.com', '3001111125', 19),
-('N˙Òez', 'David', '1990-10-05', 'david.nunez@gmail.com', '3001111126', 20),
+('Mej√≠a', 'Oscar', '1989-07-28', 'oscar.mejia@gmail.com', '3001111124', 18),
+('Jim√©nez', 'Isabella', '1995-05-11', 'isabella.jimenez@gmail.com', '3001111125', 19),
+('N√∫√±ez', 'David', '1990-10-05', 'david.nunez@gmail.com', '3001111126', 20),
 ('Ruiz', 'Mateo', '2004-08-13', 'mateo.ruiz@gmail.com', '3001111127', 31),
-('GÛmez', 'Valeria', '2005-02-09', 'valeria.gomez@gmail.com', '3001111128', 32),
+('G√≥mez', 'Valeria', '2005-02-09', 'valeria.gomez@gmail.com', '3001111128', 32),
 ('Cifuentes', 'Julian', '2003-06-19', 'julian.cifuentes@gmail.com', '3001111129', 33),
 ('Bautista', 'Sara', '2007-04-28', 'sara.bautista@gmail.com', '3001111130', 34),
 ('Ortiz', 'Manuel', '2006-09-15', 'manuel.ortiz@hotmail.com', '3001111131', 35),
 ('Moreno', 'Tatiana', '2005-11-10', 'tatiana.moreno@hotmail.com', '3001111132', 36),
 ('Pineda', 'Alejandro', '2006-01-20', 'alejandro.pineda@hotmail.com', '3001111133', 37),
-('Rojas', 'LucÌa', '2007-03-25', 'lucia.rojas@hotmail.com', '3001111134', 38),
+('Rojas', 'Luc√≠a', '2007-03-25', 'lucia.rojas@hotmail.com', '3001111134', 38),
 ('Thompson', 'Michael', '1986-12-09', 'michael.thompson@hotmail.com', '3001111135', 39),
 ('Brown', 'Emily', '1991-10-30', 'emily.brown@hotmail.com', '3001111136', 40),
 ('Dubois', 'Pierre', '1987-05-21', 'pierre.dubois@hotmail.com', '3001111137', 41),
 ('Tanaka', 'Hiroshi', '1990-08-12', 'hiroshi.tanaka@hotmail.com', '3001111138', 42),
 ('Smith', 'Robert', '1984-03-29', 'robert.smith@hotmail.com', '3001111139', 44),
 ('Larsen', 'Sven', '1988-06-25', 'sven.larsen@hotmail.com', '3001111140', 45),
-('MuÒoz', 'Erika', '1993-09-04', 'erika.munoz@outlook.com', '3001111141', 46),
+('Mu√±oz', 'Erika', '1993-09-04', 'erika.munoz@outlook.com', '3001111141', 46),
 ('Kim', 'Soojin', '1991-07-22', 'soojin.kim@outlook.com', '3001111142', 47),
 ('Nguyen', 'An', '1990-05-11', 'an.nguyen@outlook.com', '3001111143', 48),
 ('Choi', 'Minho', '1992-11-19', 'minho.choi@outlook.com', '3001111144', 49),
 ('Martens', 'Elsa', '1989-01-09', 'elsa.martens@outlook.com', '3001111145', 50),
-('DÌaz', 'Juan', '1994-03-21', 'juan.diaz@outlook.com', '3001111146', 21),
+('D√≠az', 'Juan', '1994-03-21', 'juan.diaz@outlook.com', '3001111146', 21),
 ('Pardo', 'Luisa', '1989-12-01', 'luisa.pardo@outlook.com', '3001111147', 22),
 ('Cano', 'Esteban', '1992-06-11', 'esteban.cano@outlook.com', '3001111148', 23),
 ('Vera', 'Laura', '1996-01-14', 'laura.vera@outlook.com', '3001111149', 24),
-('S·nchez', 'Tom·s', '1993-10-19', 'tomas.sanchez@outlook.com', '3001111150', 25),
+('S√°nchez', 'Tom√°s', '1993-10-19', 'tomas.sanchez@outlook.com', '3001111150', 25),
 ('Morales', 'Javier', '1988-12-01', 'javier.morales@yahoo.com', '3001111151', 4),
-('RamÌrez', 'JosÈ', '1984-09-12', 'jose.ramirez@yahoo.com', '3001111152', 12),
+('Ram√≠rez', 'Jos√©', '1984-09-12', 'jose.ramirez@yahoo.com', '3001111152', 12),
 ('Castro', 'Juan', '1991-05-25', 'juan.castro@yahoo.com', '3001111153', 14),
-('Reyes', 'Sebasti·n', '1987-12-12', 'sebastian.reyes@yahoo.com', '3001111154', 16),
-('Moreno', 'AndrÈs', '1988-08-10', 'andres.moreno@yahoo.com', '3001111155', 22),
+('Reyes', 'Sebasti√°n', '1987-12-12', 'sebastian.reyes@yahoo.com', '3001111154', 16),
+('Moreno', 'Andr√©s', '1988-08-10', 'andres.moreno@yahoo.com', '3001111155', 22),
 ('Orozco', 'Daniel', '1993-12-02', 'daniel.orozco@yahoo.com', '3001111156', 23),
-('Vega', 'MÛnica', '1986-03-14', 'monica.vega@yahoo.com', '3001111157', 26),
-('CastaÒo', 'Laura', '1994-12-16', 'laura.castano@yahoo.com', '3001111158', 28),
+('Vega', 'M√≥nica', '1986-03-14', 'monica.vega@yahoo.com', '3001111157', 26),
+('Casta√±o', 'Laura', '1994-12-16', 'laura.castano@yahoo.com', '3001111158', 28),
 ('Vallejo', 'Ricardo', '1984-11-19', 'ricardo.vallejo@yahoo.com', '3001111159', 35),
-('MarÌn', 'Carlos', '1988-08-03', 'carlos.marin@yahoo.com', '3001111160', 37);
+('Mar√≠n', 'Carlos', '1988-08-03', 'carlos.marin@yahoo.com', '3001111160', 37);
 
 -- guias (10: id_persona 41..50)
 INSERT INTO guias (id_persona, anios_de_experiencia, numero_de_tarjeta_profesional, activo) VALUES
@@ -632,16 +632,16 @@ INSERT INTO guias (id_persona, anios_de_experiencia, numero_de_tarjeta_profesion
 
 -- preferencias_de_los_usuarios (opcionales; 10 combos)
 INSERT INTO preferencias_de_los_usuarios (id_idioma, id_sistema_medicion) VALUES
-(1, 1), -- EspaÒol / MÈtrico
-(2, 1), -- InglÈs / MÈtrico
-(1, 2), -- EspaÒol / Imperial
-(11,1), -- FrancÈs / MÈtrico
-(14,1), -- Italiano / MÈtrico
-(2, 2), -- InglÈs / Imperial
-(6, 1), -- PortuguÈs / MÈtrico
-(9, 1), -- Alem·n / MÈtrico
-(10,1), -- Coreano / MÈtrico
-(7, 1); -- Ruso / MÈtrico
+(1, 1), -- Espa√±ol / M√©trico
+(2, 1), -- Ingl√©s / M√©trico
+(1, 2), -- Espa√±ol / Imperial
+(11,1), -- Franc√©s / M√©trico
+(14,1), -- Italiano / M√©trico
+(2, 2), -- Ingl√©s / Imperial
+(6, 1), -- Portugu√©s / M√©trico
+(9, 1), -- Alem√°n / M√©trico
+(10,1), -- Coreano / M√©trico
+(7, 1); -- Ruso / M√©trico
 
 -- usuarios (43: 1..40 y 48..50)
 INSERT INTO usuarios (id_persona, contrasena, id_preferencia, activo)
@@ -712,25 +712,25 @@ INSERT INTO bicicletas (
     id_seguro, id_marca, activo
 ) VALUES
 ('Trek FX 3 Disc', 'FX3D-0001', 120, 2022, 8500, 'urbano ligera', 52, 20.5, 0, 1, 1, 850, 528, 1, 1, 1),
-('Specialized Rockhopper', 'RHP-0002', 90, 2021, 12000, 'montaÒa', 48, 19.0, 0, 2, 2, 1200, 745, 2, 3, 1),
+('Specialized Rockhopper', 'RHP-0002', 90, 2021, 12000, 'monta√±a', 48, 19.0, 0, 2, 2, 1200, 745, 2, 3, 1),
 ('Cannondale Synapse', 'SYN-0003', 45, 2023, 18000, 'ruta profesional', 54, 21.0, 0, 3, 4, 400, 248, 3, 4, 1),
-('Scott Aspect 950', 'ASP-0004', 60, 2022, 11000, 'montaÒa turismo', 50, 19.7, 0, 4, 5, 750, 466, 4, 5, 1),
+('Scott Aspect 950', 'ASP-0004', 60, 2022, 11000, 'monta√±a turismo', 50, 19.7, 0, 4, 5, 750, 466, 4, 5, 1),
 ('GW Hyena', 'HY-0005', 35, 2023, 7000, 'recreativo', 46, 18.0, 0, 7, 6, 300, 186, 5, 21, 1),
-('Venzo Shadow', 'VSH-0006', 10, 2024, 19000, 'urbano elÈctrico', 48, 19.0, 1, 6, 7, 150, 93, 6, 22, 1),
-('Merida Big Nine', 'BN9-0007', 100, 2021, 13000, 'montaÒa profesional', 50, 19.5, 0, 2, 8, 950, 590, 7, 8, 1),
-('Cube Nature', 'CN-0008', 25, 2023, 9500, 'hÌbrido', 52, 20.0, 0, 5, 9, 400, 248, 8, 9, 1),
+('Venzo Shadow', 'VSH-0006', 10, 2024, 19000, 'urbano el√©ctrico', 48, 19.0, 1, 6, 7, 150, 93, 6, 22, 1),
+('Merida Big Nine', 'BN9-0007', 100, 2021, 13000, 'monta√±a profesional', 50, 19.5, 0, 2, 8, 950, 590, 7, 8, 1),
+('Cube Nature', 'CN-0008', 25, 2023, 9500, 'h√≠brido', 52, 20.0, 0, 5, 9, 400, 248, 8, 9, 1),
 ('Giant Escape 3', 'ESC3-0009', 70, 2022, 8000, 'urbano transporte', 50, 19.5, 0, 9, 10, 700, 434, 9, 2, 1),
-('Orbea Alma', 'ALM-0010', 55, 2022, 12500, 'montaÒa', 49, 19.3, 0, 2, 11, 640, 398, 10, 10, 1),
+('Orbea Alma', 'ALM-0010', 55, 2022, 12500, 'monta√±a', 49, 19.3, 0, 2, 11, 640, 398, 10, 10, 1),
 ('Santa Cruz Blur', 'BLR-0011', 200, 2020, 20000, 'profesional', 56, 22.0, 0, 8, 12, 1800, 1118, 11, 6, 1),
 ('Liv Flourish', 'LIV-0012', 15, 2023, 7500, 'urbano femenino', 44, 17.3, 0, 1, 13, 180, 112, 12, 16, 1),
 ('BMC Roadmachine', 'RDM-0013', 80, 2022, 18500, 'ruta avanzada', 55, 21.7, 0, 3, 14, 950, 590, 13, 7, 1),
-('Polygon Path E5', 'PTH-0014', 40, 2023, 21000, 'elÈctrico urbano', 50, 19.7, 1, 6, 15, 420, 261, 14, 17, 1),
-('Yeti SB150', 'SB150-0015', 30, 2023, 17000, 'montaÒa avanzada', 52, 20.5, 0, 2, 16, 310, 192, 15, 13, 1),
-('Tern Vektron', 'VKT-0016', 18, 2024, 20000, 'elÈctrico plegable', 46, 18.1, 1, 6, 17, 160, 99, 12, 24, 1),
+('Polygon Path E5', 'PTH-0014', 40, 2023, 21000, 'el√©ctrico urbano', 50, 19.7, 1, 6, 15, 420, 261, 14, 17, 1),
+('Yeti SB150', 'SB150-0015', 30, 2023, 17000, 'monta√±a avanzada', 52, 20.5, 0, 2, 16, 310, 192, 15, 13, 1),
+('Tern Vektron', 'VKT-0016', 18, 2024, 20000, 'el√©ctrico plegable', 46, 18.1, 1, 6, 17, 160, 99, 12, 24, 1),
 ('Totem Rider', 'RDR-0017', 120, 2020, 8500, 'transporte', 48, 19.0, 0, 9, 18, 1300, 808, 11, 23, 1),
 ('Bianchi Infinito', 'INF-0018', 90, 2021, 19500, 'ruta elite', 54, 21.2, 0, 3, 19, 890, 553, 15, 25, 1),
-('GT Avalanche', 'AVL-0019', 140, 2020, 14000, 'montaÒa media', 50, 19.6, 0, 2, 20, 1100, 683, 1, 11, 1),
-('Decathlon Rockrider ST520', 'ST520-0020', 65, 2023, 9000, 'montaÒa', 49, 19.3, 0, 2, 2, 500, 310, 2, 28, 1),
+('GT Avalanche', 'AVL-0019', 140, 2020, 14000, 'monta√±a media', 50, 19.6, 0, 2, 20, 1100, 683, 1, 11, 1),
+('Decathlon Rockrider ST520', 'ST520-0020', 65, 2023, 9000, 'monta√±a', 49, 19.3, 0, 2, 2, 500, 310, 2, 28, 1),
 ('Trek Marlin 7', 'MAR7-0021', 95, 2022, 11500, 'mtb urbano', 50, 19.7, 0, 2, 1, 980, 609, 2, 3, 1),
 ('Giant Talon 2', 'TAL2-0022', 60, 2023, 12000, 'mtb senderos', 52, 20.5, 0, 2, 1, 620, 385, 4, 5, 1),
 ('Specialized Sirrus 2.0', 'SIR2-0023', 40, 2024, 9000, 'urbano fitness', 52, 20.5, 0, 1, 5, 300, 186, 3, 4, 1),
@@ -1202,18 +1202,18 @@ INSERT INTO condiciones_de_las_bicicletas (id_bicicleta, id_condicion_especial) 
 INSERT INTO mantenimientos (descripcion, fecha_de_inicio, fecha_de_fin, id_tipo_de_mantenimiento, id_bicicleta) VALUES
 ('Ajuste de frenos y cambio de cables', '2025-02-10', '2025-02-12', 4, 2),
 ('Cambio de llantas tras desgaste', '2025-01-15', '2025-01-18', 2, 3),
-('LubricaciÛn de cadena y revisiÛn general', '2025-02-20', '2025-02-20', 1, 5),
-('RevisiÛn elÈctrica del sistema de asistencia', '2025-02-25', '2025-02-27', 3, 6),
-('SustituciÛn de pedales', '2025-03-01', '2025-03-02', 2, 7),
-('Limpieza y ajuste de transmisiÛn', '2025-03-03', '2025-03-04', 1, 10),
-('RevisiÛn preventiva completa', '2025-03-05', NULL, 1, 12);
+('Lubricaci√≥n de cadena y revisi√≥n general', '2025-02-20', '2025-02-20', 1, 5),
+('Revisi√≥n el√©ctrica del sistema de asistencia', '2025-02-25', '2025-02-27', 3, 6),
+('Sustituci√≥n de pedales', '2025-03-01', '2025-03-02', 2, 7),
+('Limpieza y ajuste de transmisi√≥n', '2025-03-03', '2025-03-04', 1, 10),
+('Revisi√≥n preventiva completa', '2025-03-05', NULL, 1, 12);
 
 -- reportes
 INSERT INTO reportes (titulo, descripcion, fecha_de_creacion, id_persona, id_bicicleta) VALUES
-('Freno delantero suelto', 'Durante el recorrido notÈ que el freno delantero no ajusta bien.', '2025-03-01', 3, 2),
-('Cadena oxidada', 'La cadena presenta Ûxido, necesita mantenimiento.', '2025-03-02', 4, 3),
+('Freno delantero suelto', 'Durante el recorrido not√© que el freno delantero no ajusta bien.', '2025-03-01', 3, 2),
+('Cadena oxidada', 'La cadena presenta √≥xido, necesita mantenimiento.', '2025-03-02', 4, 3),
 ('Ruidoso el eje', 'Emite un ruido fuerte al pedalear.', '2025-03-02', 5, 4),
-('Pantalla elÈctrica no enciende', 'El sistema de la bicicleta elÈctrica no enciende.', '2025-03-03', 6, 6),
+('Pantalla el√©ctrica no enciende', 'El sistema de la bicicleta el√©ctrica no enciende.', '2025-03-03', 6, 6),
 ('Asiento flojo', 'El asiento se mueve al pedalear.', '2025-03-04', 7, 5);
 
 -- estados_tomados_por_los_reportes
@@ -1229,7 +1229,7 @@ INSERT INTO estados_tomados_por_los_reportes (id_estado_del_reporte, id_reporte,
 (2, 4, '2025-03-04', NULL),
 (1, 5, '2025-03-04', NULL);
 
--- metodos_de_pago_aceptados_por_alquileres (usa puntos_de_alquiler 1..10 y mÈtodos 1..4)
+-- metodos_de_pago_aceptados_por_alquileres (usa puntos_de_alquiler 1..10 y m√©todos 1..4)
 INSERT INTO metodos_de_pago_aceptados_por_alquileres (id_punto_de_alquiler, id_metodo_de_pago) VALUES
 (1, 1), (1, 2), (1, 3),
 (2, 1), (2, 2),
@@ -1308,7 +1308,14 @@ FROM (VALUES
     ('2025-01-11','2025-01-13',3,24,27,4),
     ('2025-01-12','2025-01-14',4,25,28,1),
     ('2025-01-13','2025-01-20',6,26,29,2),
-    ('2025-01-14','2025-01-17',3,27,30,1)
+    ('2025-01-14','2025-01-17',3,27,30,1),
+    ('2025-11-01',NULL,6, 32, 48, 2),
+    ('2025-10-21',NULL,6, 33, 49, 1),
+    ('2025-11-11',NULL,1, 34, 50, 2),
+    ('2025-11-11',NULL,2, 35, 51, 1),   
+    ('2025-11-07',NULL,5, 36, 52, 1),   
+    ('2025-7-10',NULL,7, 37, 53, 2),
+    ('2025-3-02',NULL,7, 34, 54, 3)   
 ) AS v(fecha_inicio, fecha_fin, id_plan, id_usuario, id_bicicleta, id_metodo_pago)
 JOIN bicicletas b ON b.id_bicicleta = v.id_bicicleta
 JOIN planes_de_los_alquileres p ON p.id_plan = v.id_plan
@@ -1410,10 +1417,10 @@ INSERT INTO estados_tomados_por_los_alquileres (id_estado_del_alquiler, id_alqui
 
 -- rutas_turisticas (usa niveles_dificultad)
 INSERT INTO rutas_turisticas (nombre, descripcion, distancia_total_mi, distancia_total_km, id_nivel_dificultad) VALUES
-('Ruta del CafÈ QuindÌo', 'Recorrido entre plantaciones de cafÈ y miradores del eje cafetero.', 24.85, 40.00, 2),
-('Cicloruta Costera Cartagena', 'Ruta panor·mica por la costa y el centro histÛrico.', 12.43, 20.00, 1),
-('Ruta MontaÒa de los Andes', 'Subida exigente por senderos de montaÒa en Antioquia.', 31.06, 50.00, 3),
-('Cicloaventura Valle del Cauca', 'Ruta moderada entre caÒaduzales y pueblos coloridos.', 18.64, 30.00, 2);
+('Ruta del Caf√© Quind√≠o', 'Recorrido entre plantaciones de caf√© y miradores del eje cafetero.', 24.85, 40.00, 2),
+('Cicloruta Costera Cartagena', 'Ruta panor√°mica por la costa y el centro hist√≥rico.', 12.43, 20.00, 1),
+('Ruta Monta√±a de los Andes', 'Subida exigente por senderos de monta√±a en Antioquia.', 31.06, 50.00, 3),
+('Cicloaventura Valle del Cauca', 'Ruta moderada entre ca√±aduzales y pueblos coloridos.', 18.64, 30.00, 2);
 
 -- puntos_de_interes_de_las_rutas (usa puntos_de_interes + rutas_turisticas)
 INSERT INTO puntos_de_interes_de_las_rutas (id_punto_de_interes, id_ruta_turistica, activo) VALUES
@@ -1422,7 +1429,7 @@ INSERT INTO puntos_de_interes_de_las_rutas (id_punto_de_interes, id_ruta_turisti
 (4,  3, 1), (5,  3, 1), (6,  3, 1),
 (10, 4, 1), (11, 4, 1), (12, 4, 1);
 
--- idiomas_de_los_guias (guÌas 41..50 con varios idiomas)
+-- idiomas_de_los_guias (gu√≠as 41..50 con varios idiomas)
 INSERT INTO idiomas_de_los_guias (id_guia, id_idioma) VALUES
 (41, 1), (41, 2),
 (42, 1), (42, 11),
@@ -1451,18 +1458,18 @@ INSERT INTO disponibilidades_tomadas_por_los_guias (id_estado_de_disponibilidad_
 -------------------------------------------------------------
 -- ROLES DE LAS PERSONAS
 -------------------------------------------------------------
--- Rol 1 = Cliente, Rol 2 = GuÌa
+-- Rol 1 = Cliente, Rol 2 = Gu√≠a
 
--- 3 personas ser·n tanto guÌas como usuarios (personas 48, 49, 50)
+-- 3 personas ser√°n tanto gu√≠as como usuarios (personas 48, 49, 50)
 INSERT INTO roles_de_las_personas (id_persona, id_rol) VALUES
 -- Usuarios (1..40)
 (1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),
 (11,1),(12,1),(13,1),(14,1),(15,1),(16,1),(17,1),(18,1),(19,1),(20,1),
 (21,1),(22,1),(23,1),(24,1),(25,1),(26,1),(27,1),(28,1),(29,1),(30,1),
 (31,1),(32,1),(33,1),(34,1),(35,1),(36,1),(37,1),(38,1),(39,1),(40,1),
--- GuÌas (41..47)
+-- Gu√≠as (41..47)
 (41,2),(42,2),(43,2),(44,2),(45,2),(46,2),(47,2),
--- Mixtos (48..50 ? usuarios y guÌas)
+-- Mixtos (48..50 ? usuarios y gu√≠as)
 (48,1),(48,2),
 (49,1),(49,2),
 (50,1),(50,2);
@@ -1476,49 +1483,49 @@ INSERT INTO comentables (nombre) VALUES
 -------------------------------------------------------------
 INSERT INTO comentarios (id_persona, id_comentable, calificacion, descripcion, fecha_de_creacion, visible)
 VALUES
--- ?? Comentarios sobre bicicletas (1ñ15)
+-- ?? Comentarios sobre bicicletas (1¬ñ15)
 (1, 1,5, 'La bicicleta estaba impecable, frenos y cambios en perfecto estado.', '2025-03-10', 1),
-(2, 1,4, 'Buena bicicleta, aunque el sillÌn era un poco duro.', '2025-03-12', 1),
-(3, 1,5, 'Excelente mantenimiento, se sentÌa como nueva.', '2025-03-14', 1),
-(4, 1,2, 'La bicicleta hacÌa ruido al pedalear, deberÌa revisarse.', '2025-03-15', 1),
-(5, 1,3, 'FuncionÛ bien, pero los frenos estaban algo flojos.', '2025-03-17', 1),
+(2, 1,4, 'Buena bicicleta, aunque el sill√≠n era un poco duro.', '2025-03-12', 1),
+(3, 1,5, 'Excelente mantenimiento, se sent√≠a como nueva.', '2025-03-14', 1),
+(4, 1,2, 'La bicicleta hac√≠a ruido al pedalear, deber√≠a revisarse.', '2025-03-15', 1),
+(5, 1,3, 'Funcion√≥ bien, pero los frenos estaban algo flojos.', '2025-03-17', 1),
 (6, 1,1, 'El cambio de velocidades no funcionaba correctamente.', '2025-03-20', 1),
-(7, 1,4, 'CÛmoda y ligera, ideal para trayectos urbanos.', '2025-03-22', 1),
+(7, 1,4, 'C√≥moda y ligera, ideal para trayectos urbanos.', '2025-03-22', 1),
 (8, 1,5, 'Perfecta para el recorrido, muy estable.', '2025-03-23', 1),
-(9, 1,3, 'La llanta trasera estaba un poco baja, pero soportÛ bien.', '2025-03-25', 1),
-(10, 1,5, 'Excelente bicicleta elÈctrica, baterÌa duradera.', '2025-03-26', 1),
-(11, 1,4, 'La bicicleta cumpliÛ su funciÛn, buen mantenimiento.', '2025-03-27', 1),
-(12, 1,2, 'El freno delantero fallÛ durante la ruta.', '2025-03-29', 1),
-(13, 1,5, 'Muy buena suspensiÛn y buena estabilidad.', '2025-03-30', 1),
-(14, 1,3, 'La bicicleta era cÛmoda, pero algo pesada.', '2025-04-01', 1),
+(9, 1,3, 'La llanta trasera estaba un poco baja, pero soport√≥ bien.', '2025-03-25', 1),
+(10, 1,5, 'Excelente bicicleta el√©ctrica, bater√≠a duradera.', '2025-03-26', 1),
+(11, 1,4, 'La bicicleta cumpli√≥ su funci√≥n, buen mantenimiento.', '2025-03-27', 1),
+(12, 1,2, 'El freno delantero fall√≥ durante la ruta.', '2025-03-29', 1),
+(13, 1,5, 'Muy buena suspensi√≥n y buena estabilidad.', '2025-03-30', 1),
+(14, 1,3, 'La bicicleta era c√≥moda, pero algo pesada.', '2025-04-01', 1),
 (15, 1,4, 'Gran bicicleta, ideal para principiantes.', '2025-04-03', 1),
--- ?? Comentarios sobre rutas (16ñ30)
+-- ?? Comentarios sobre rutas (16¬ñ30)
 (16, 3,5, 'Ruta espectacular con vistas impresionantes.', '2025-04-05', 1),
-(17, 3,4, 'Muy bien seÒalizada y segura.', '2025-04-07', 1),
-(18, 3,2, 'Demasiado tr·fico de autos, poco disfrutable.', '2025-04-08', 1),
+(17, 3,4, 'Muy bien se√±alizada y segura.', '2025-04-07', 1),
+(18, 3,2, 'Demasiado tr√°fico de autos, poco disfrutable.', '2025-04-08', 1),
 (19, 3,5, 'El recorrido fue tranquilo y bien organizado.', '2025-04-09', 1),
-(20, 3,4, 'Buena duraciÛn, aunque algo exigente fÌsicamente.', '2025-04-10', 1),
-(21, 3,1, 'Mala organizaciÛn, el grupo se separÛ durante la ruta.', '2025-04-11', 1),
-(22, 3,3, 'Ruta aceptable, aunque el terreno fue m·s difÌcil de lo esperado.', '2025-04-12', 1),
+(20, 3,4, 'Buena duraci√≥n, aunque algo exigente f√≠sicamente.', '2025-04-10', 1),
+(21, 3,1, 'Mala organizaci√≥n, el grupo se separ√≥ durante la ruta.', '2025-04-11', 1),
+(22, 3,3, 'Ruta aceptable, aunque el terreno fue m√°s dif√≠cil de lo esperado.', '2025-04-12', 1),
 (23, 3,5, 'Hermosos paisajes y clima perfecto.', '2025-04-13', 1),
 (24, 3,4, 'Muy buena experiencia, perfecta para un paseo en familia.', '2025-04-14', 1),
-(25, 3,5, 'IncreÌble ruta, bien explicada por los guÌas.', '2025-04-15', 1),
-(26, 3,3, 'El inicio fue algo caÛtico, pero mejorÛ con el tiempo.', '2025-04-16', 1),
+(25, 3,5, 'Incre√≠ble ruta, bien explicada por los gu√≠as.', '2025-04-15', 1),
+(26, 3,3, 'El inicio fue algo ca√≥tico, pero mejor√≥ con el tiempo.', '2025-04-16', 1),
 (27, 3,4, 'Ruta larga pero gratificante, excelente nivel de dificultad.', '2025-04-17', 1),
-(28, 3,5, 'La mejor ruta turÌstica que he hecho.', '2025-04-18', 1),
+(28, 3,5, 'La mejor ruta tur√≠stica que he hecho.', '2025-04-18', 1),
 (29, 3,3, 'El terreno estaba algo resbaladizo, pero fue divertido.', '2025-04-19', 1),
-(30, 3,2, 'No me gustÛ la ruta, demasiadas paradas innecesarias.', '2025-04-20', 1),
--- ????? Comentarios sobre guÌas (31ñ40)
-(31, 2,5, 'El guÌa fue excelente, explicÛ todo con entusiasmo.', '2025-04-21', 1),
+(30, 3,2, 'No me gust√≥ la ruta, demasiadas paradas innecesarias.', '2025-04-20', 1),
+-- ????? Comentarios sobre gu√≠as (31¬ñ40)
+(31, 2,5, 'El gu√≠a fue excelente, explic√≥ todo con entusiasmo.', '2025-04-21', 1),
 (32, 2,4, 'Muy atento y paciente con todos los participantes.', '2025-04-22', 1),
-(33, 2,3, 'Buen guÌa, aunque hablaba muy r·pido.', '2025-04-23', 1),
-(34, 2,5, 'Gran conocimiento histÛrico y cultural, excelente actitud.', '2025-04-24', 1),
-(35, 2,4, 'Fue un recorrido agradable gracias al guÌa.', '2025-04-25', 1),
-(36, 2,2, 'El guÌa parecÌa apurado, poca interacciÛn.', '2025-04-26', 1),
-(37, 2,5, 'Excelente atenciÛn, respondiÛ todas las preguntas.', '2025-04-27', 1),
-(38, 2,3, 'El guÌa fue correcto, aunque poco expresivo.', '2025-04-28', 1),
-(39, 2,4, 'Buena guÌa, siempre pendiente del grupo.', '2025-04-29', 1),
-(40, 2,1, 'El guÌa llegÛ tarde y se notaba desinteresado.', '2025-04-30', 1);
+(33, 2,3, 'Buen gu√≠a, aunque hablaba muy r√°pido.', '2025-04-23', 1),
+(34, 2,5, 'Gran conocimiento hist√≥rico y cultural, excelente actitud.', '2025-04-24', 1),
+(35, 2,4, 'Fue un recorrido agradable gracias al gu√≠a.', '2025-04-25', 1),
+(36, 2,2, 'El gu√≠a parec√≠a apurado, poca interacci√≥n.', '2025-04-26', 1),
+(37, 2,5, 'Excelente atenci√≥n, respondi√≥ todas las preguntas.', '2025-04-27', 1),
+(38, 2,3, 'El gu√≠a fue correcto, aunque poco expresivo.', '2025-04-28', 1),
+(39, 2,4, 'Buena gu√≠a, siempre pendiente del grupo.', '2025-04-29', 1),
+(40, 2,1, 'El gu√≠a lleg√≥ tarde y se notaba desinteresado.', '2025-04-30', 1);
 
 -------------------------------------------------------------
 -- COMENTARIOS DE LAS BICICLETAS
@@ -1530,7 +1537,7 @@ VALUES
 (11, 11), (12, 12), (13, 13), (14, 14), (15, 15);
 
 -------------------------------------------------------------
--- COMENTARIOS DE LOS GUÕAS
+-- COMENTARIOS DE LOS GU√çAS
 -------------------------------------------------------------
 INSERT INTO comentarios_de_los_guias (id_comentario, id_guia)
 VALUES
@@ -1539,7 +1546,7 @@ VALUES
 (26, 41), (27, 42), (28, 42), (29, 44), (30, 46);
 
 -------------------------------------------------------------
--- COMENTARIOS DE LAS RUTAS TURÕSTICAS
+-- COMENTARIOS DE LAS RUTAS TUR√çSTICAS
 -------------------------------------------------------------
 INSERT INTO comentarios_de_las_rutas_turisticas (id_comentario, id_ruta_turistica)
 VALUES
@@ -1547,14 +1554,14 @@ VALUES
 (36, 2), (37, 3), (38, 4), (39, 4), (40, 3);
 
 -------------------------------------------------------------
--- ETIQUETAS (categorÌas o temas para comentarios)
+-- ETIQUETAS (categor√≠as o temas para comentarios)
 -------------------------------------------------------------
 INSERT INTO etiquetas (titulo)
 VALUES
 ('Servicio al cliente'),
-('CondiciÛn de la bicicleta'),
+('Condici√≥n de la bicicleta'),
 ('Precio'),
-('Experiencia del guÌa'),
+('Experiencia del gu√≠a'),
 ('Seguridad de la ruta'),
 ('Paisaje'),
 ('Puntualidad'),
@@ -1574,7 +1581,7 @@ VALUES
 (16, 5), (17, 3), (18, 6), (19, 3), (20, 5),
 (21, 6), (22, 5), (23, 3), (24, 1), (25, 5),
 (26, 3), (27, 5), (28, 1), (29, 5), (30, 6),
--- GuÌas
+-- Gu√≠as
 (31, 4), (32, 4), (33, 4), (34, 4), (35, 4),
 (36, 6), (37, 4), (38, 4), (39, 4), (40, 6);
 
@@ -1614,9 +1621,9 @@ INSERT INTO archivos_multimedia_de_reportes (id_reporte, id_archivo_multimedia) 
 -- ESTADOS DE LOS RECORRIDOS
 -------------------------------------------------------------
 INSERT INTO estados_de_los_recorridos (nombre, descripcion) VALUES
-('Programado', 'El recorrido est· agendado y pendiente de iniciar.'),
-('En curso', 'El recorrido se encuentra actualmente en ejecuciÛn.'),
-('Finalizado', 'El recorrido concluyÛ satisfactoriamente.'),
+('Programado', 'El recorrido est√° agendado y pendiente de iniciar.'),
+('En curso', 'El recorrido se encuentra actualmente en ejecuci√≥n.'),
+('Finalizado', 'El recorrido concluy√≥ satisfactoriamente.'),
 ('Cancelado', 'El recorrido fue cancelado antes de su inicio.');
 
 -------------------------------------------------------------
@@ -1641,43 +1648,43 @@ VALUES
 ('15:00', '19:00', '2025-11-05', 4);
 
 -------------------------------------------------------------
--- GUIAS ASIGNADOS A LOS RECORRIDOS (algunos con m˙ltiples guÌas)
+-- GUIAS ASIGNADOS A LOS RECORRIDOS (algunos con m√∫ltiples gu√≠as)
 -------------------------------------------------------------
 INSERT INTO guias_de_los_recorridos (id_recorrido, id_guia) VALUES
 (1, 41),
 (1, 42),
 (1, 43),
--- Recorrido 2 (2 guÌas)
+-- Recorrido 2 (2 gu√≠as)
 (2, 44),
 (2, 45),
--- Recorrido 3 (2 guÌas)
+-- Recorrido 3 (2 gu√≠as)
 (3, 46),
 (3, 47),
--- Recorrido 4 (1 guÌa)
+-- Recorrido 4 (1 gu√≠a)
 (4, 48),
--- Recorrido 5 (2 guÌas)
+-- Recorrido 5 (2 gu√≠as)
 (5, 49),
 (5, 50),
--- Recorridos restantes (1 guÌa cada uno)
+-- Recorridos restantes (1 gu√≠a cada uno)
 (6, 41),
 (7, 42),
 (8, 43),
 (9, 44),
 (10, 45),
--- ?? Nuevos recorridos aÒadidos:
--- Recorrido 11 (en curso ñ 3 guÌas activos)
+-- ?? Nuevos recorridos a√±adidos:
+-- Recorrido 11 (en curso ¬ñ 3 gu√≠as activos)
 (11, 41),
 (11, 43),
 (11, 45),
--- Recorrido 12 (finalizado ñ 2 guÌas)
+-- Recorrido 12 (finalizado ¬ñ 2 gu√≠as)
 (12, 46),
 (12, 48),
--- Recorrido 13 (finalizado ñ 1 guÌa)
+-- Recorrido 13 (finalizado ¬ñ 1 gu√≠a)
 (13, 47),
--- Recorrido 14 (finalizado ñ 2 guÌas)
+-- Recorrido 14 (finalizado ¬ñ 2 gu√≠as)
 (14, 49),
 (14, 50),
--- Recorrido 15 (finalizado ñ 1 guÌa)
+-- Recorrido 15 (finalizado ¬ñ 1 gu√≠a)
 (15, 44);
 
 -------------------------------------------------------------
@@ -1722,17 +1729,17 @@ VALUES
 -- ESTADOS DE LAS PARTICIPACIONES
 -------------------------------------------------------------
 INSERT INTO estados_de_las_participaciones (nombre, descripcion) VALUES
-('Pendiente', 'El usuario se ha inscrito pero el recorrido a˙n no ha iniciado.'),
-('Activa', 'El usuario est· participando en el recorrido actualmente.'),
+('Pendiente', 'El usuario se ha inscrito pero el recorrido a√∫n no ha iniciado.'),
+('Activa', 'El usuario est√° participando en el recorrido actualmente.'),
 ('Finalizada', 'El recorrido del usuario ha terminado.'),
-('Cancelada', 'La participaciÛn fue cancelada antes del inicio.');
+('Cancelada', 'La participaci√≥n fue cancelada antes del inicio.');
 
 -------------------------------------------------------------
 -- PARTICIPACIONES (75 en total)
 -------------------------------------------------------------
 INSERT INTO participaciones (fecha_de_inscripcion, tarifa_pagada, id_metodo_de_pago, id_recorrido, id_usuario)
 VALUES
--- Recorrido 1 (3 guÌas, 15 participantes)
+-- Recorrido 1 (3 gu√≠as, 15 participantes)
 ('2025-01-25', 18000, 1, 1, 1),
 ('2025-01-25', 18000, 2, 1, 2),
 ('2025-01-26', 18000, 3, 1, 3),
@@ -1749,7 +1756,7 @@ VALUES
 ('2025-01-29', 18000, 3, 1, 14),
 ('2025-01-29', 18000, 1, 1, 15),
 
--- Recorrido 2 (2 guÌas, 10 participantes)
+-- Recorrido 2 (2 gu√≠as, 10 participantes)
 ('2025-01-27', 20000, 1, 2, 16),
 ('2025-01-27', 20000, 2, 2, 17),
 ('2025-01-27', 20000, 3, 2, 18),
@@ -1761,7 +1768,7 @@ VALUES
 ('2025-01-30', 20000, 3, 2, 24),
 ('2025-01-31', 20000, 1, 2, 25),
 
--- Recorrido 3 (2 guÌas, 9 participantes)
+-- Recorrido 3 (2 gu√≠as, 9 participantes)
 ('2025-01-30', 21000, 1, 3, 26),
 ('2025-01-30', 21000, 2, 3, 27),
 ('2025-01-31', 21000, 3, 3, 28),
@@ -1772,7 +1779,7 @@ VALUES
 ('2025-02-02', 21000, 2, 3, 33),
 ('2025-02-02', 21000, 3, 3, 34),
 
--- Recorrido 4 (1 guÌa, 7 participantes)
+-- Recorrido 4 (1 gu√≠a, 7 participantes)
 ('2025-02-01', 23000, 1, 4, 35),
 ('2025-02-02', 23000, 2, 4, 36),
 ('2025-02-02', 23000, 3, 4, 37),
@@ -1781,7 +1788,7 @@ VALUES
 ('2025-02-03', 23000, 3, 4, 40),
 ('2025-02-03', 23000, 1, 4, 1),
 
--- Recorrido 5 (2 guÌas, 8 participantes)
+-- Recorrido 5 (2 gu√≠as, 8 participantes)
 ('2025-02-02', 26000, 1, 5, 2),
 ('2025-02-02', 26000, 2, 5, 3),
 ('2025-02-02', 26000, 3, 5, 4),
@@ -1791,7 +1798,7 @@ VALUES
 ('2025-02-03', 26000, 1, 5, 8),
 ('2025-02-03', 26000, 2, 5, 9),
 
--- Recorridos 6ñ10 (participaciones m·s reducidas)
+-- Recorridos 6¬ñ10 (participaciones m√°s reducidas)
 ('2025-02-02', 19000, 1, 6, 10),
 ('2025-02-02', 19000, 2, 6, 11),
 ('2025-02-03', 19000, 3, 6, 12),
@@ -1960,7 +1967,7 @@ VALUES
 (3, 19, '2025-02-02', '2025-02-02'),
 (3, 20, '2025-02-02', '2025-02-02'),
 
--- Recorridos 4ñ10 (finalizados y pendientes)
+-- Recorridos 4¬ñ10 (finalizados y pendientes)
 (3, 21, '2025-02-03', '2025-02-03'),
 (3, 22, '2025-02-03', '2025-02-03'),
 (3, 23, '2025-02-03', '2025-02-03'),

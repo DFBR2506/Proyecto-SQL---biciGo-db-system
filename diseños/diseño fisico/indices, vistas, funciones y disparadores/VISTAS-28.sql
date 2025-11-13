@@ -1,5 +1,5 @@
 /* ============================================================
-   SECCIÓN A — VISTAS DE AGREGACIÓN Y ANÁLISIS BÁSICO
+   SECCIÃ“N A â€” VISTAS DE AGREGACIÃ“N Y ANÃLISIS BÃSICO
 ============================================================ */
 
 -- 1. Tarifas_promedio_por_uso
@@ -37,7 +37,16 @@ SELECT
     a.id_alquiler AS ID,
     a.fecha_de_inicio_de_vigencia AS Fecha_Inicio,
     a.fecha_de_fin_de_vigencia AS Fecha_Fin,
-    DATEDIFF(DAY, a.fecha_de_inicio_de_vigencia, a.fecha_de_fin_de_vigencia) AS Duracion,
+    CASE pdla.id_plan
+		WHEN 1 THEN 'Una hora'
+		WHEN 2 THEN 'Un dÃ­a'
+		WHEN 3 THEN 'Tres dÃ­as'
+		WHEN 4 THEN 'Cinco dÃ­as'
+		WHEN 5 THEN 'Una semana'
+		WHEN 6 THEN 'Un mes'
+		WHEN 7 THEN 'Un aÃ±o'
+	END	
+	AS Duracion,
     p.primer_nombre + ' ' + p.primer_apellido AS Nombre_usuario,
     bici.modelo AS Modelo_bicicleta,
     m.nombre AS Marca,
@@ -55,7 +64,7 @@ GO
 
 
 /* ============================================================
-   SECCIÓN B — CTE + AGREGACIÓN AVANZADA
+   SECCIÃ“N B â€” CTE + AGREGACIÃ“N AVANZADA
 ============================================================ */
 
 -- 4. Reportes_Mensuales
@@ -152,7 +161,7 @@ SELECT
     *,
     CASE 
         WHEN dias_inactiva IS NULL THEN 'Nunca rentada'
-        WHEN dias_inactiva > 90 THEN 'Inactividad CRÍTICA'
+        WHEN dias_inactiva > 90 THEN 'Inactividad CRÃTICA'
         WHEN dias_inactiva > 60 THEN 'Inactividad ALTA'
         WHEN dias_inactiva > 30 THEN 'Inactividad MEDIA'
         ELSE 'Inactividad BAJA'
@@ -163,7 +172,7 @@ GO
 
 
 /* ============================================================
-   SECCIÓN C — OPERACIONES DE CONJUNTO
+   SECCIÃ“N C â€” OPERACIONES DE CONJUNTO
 ============================================================ */
 
 -- 6. info_mantenimiento_bicicletas
@@ -237,14 +246,14 @@ GO
 
 
 /* ============================================================
-   SECCIÓN D — FUNCIONES DE VENTANA
+   SECCIÃ“N D â€” FUNCIONES DE VENTANA
 ============================================================ */
 
 -- 9. Ranking_Bicicletas
 CREATE OR ALTER VIEW Ranking_Bicicletas AS
 WITH RankingBicicletas AS (
     SELECT 
-        FORMAT(a.fecha_de_inicio_de_vigencia, 'yyyy-MM') AS año_mes,
+        FORMAT(a.fecha_de_inicio_de_vigencia, 'yyyy-MM') AS aÃ±o_mes,
         DATENAME(MONTH, a.fecha_de_inicio_de_vigencia) AS mes,
         b.id_bicicleta,
         b.modelo,
@@ -266,7 +275,7 @@ WITH RankingBicicletas AS (
         m.nombre
 )
 SELECT 
-    año_mes,
+    aÃ±o_mes,
     mes,
     id_bicicleta,
     modelo,
@@ -336,7 +345,7 @@ SELECT
     LEAD(tarifa_total, 1) OVER (PARTITION BY id_usuario ORDER BY fecha_de_inicio_de_vigencia) AS tarifa_siguiente,
     CASE 
         WHEN LAG(tarifa_total,1) OVER (PARTITION BY id_usuario ORDER BY fecha_de_inicio_de_vigencia) IS NULL THEN 'Primer alquiler'
-        WHEN LEAD(tarifa_total,1) OVER (PARTITION BY id_usuario ORDER BY fecha_de_inicio_de_vigencia) IS NULL THEN 'Último alquiler'
+        WHEN LEAD(tarifa_total,1) OVER (PARTITION BY id_usuario ORDER BY fecha_de_inicio_de_vigencia) IS NULL THEN 'Ãšltimo alquiler'
         ELSE 'Intermedio'
     END AS posicion_relativa
 FROM alquileres;
@@ -345,7 +354,7 @@ GO
 
 
 /* ============================================================
-   SECCIÓN E — SUBCONSULTAS AUTÓNOMAS / CORRELACIONADAS
+   SECCIÃ“N E â€” SUBCONSULTAS AUTÃ“NOMAS / CORRELACIONADAS
 ============================================================ */
 
 -- 13. vw_usuarios_actividad_total
@@ -404,7 +413,7 @@ GO
 
 
 /* ============================================================
-   SECCIÓN F — PIVOT
+   SECCIÃ“N F â€” PIVOT
 ============================================================ */
 
 -- 15. vw_pivot_bicicletas_por_marca_y_tipo
@@ -412,25 +421,25 @@ CREATE OR ALTER VIEW vw_pivot_bicicletas_por_marca_y_tipo AS
 WITH base AS (
     SELECT 
         m.nombre AS marca,
-        CASE WHEN b.es_electrica = 1 THEN 'Eléctrica' ELSE 'Convencional' END AS tipo
+        CASE WHEN b.es_electrica = 1 THEN 'ElÃ©ctrica' ELSE 'Convencional' END AS tipo
     FROM bicicletas b
     JOIN marcas m ON b.id_marca = m.id_marca
 )
 SELECT 
     marca,
-    ISNULL([Eléctrica],0) AS total_electricas,
+    ISNULL([ElÃ©ctrica],0) AS total_electricas,
     ISNULL([Convencional],0) AS total_convencionales
 FROM base
 PIVOT (
     COUNT(tipo)
-    FOR tipo IN ([Eléctrica], [Convencional])
+    FOR tipo IN ([ElÃ©ctrica], [Convencional])
 ) AS pvt;
 GO
 
 
 
 /* ============================================================
-   SECCIÓN G — VISTAS PRINCIPALES DEL BLOQUE ORIGINAL
+   SECCIÃ“N G â€” VISTAS PRINCIPALES DEL BLOQUE ORIGINAL
 ============================================================ */
 
 -- 16. vw_bicicletas_detalle_general
@@ -443,7 +452,7 @@ SELECT
     p.nombre AS punto_alquiler,
     c.nombre AS ciudad,
     CASE 
-        WHEN b.es_electrica = 1 THEN 'Eléctrica'
+        WHEN b.es_electrica = 1 THEN 'ElÃ©ctrica'
         ELSE 'Convencional'
     END AS tipo_bicicleta,
     YEAR(b.anio_de_fabricacion) AS anio_fabricacion,
@@ -451,7 +460,7 @@ SELECT
     b.kilometraje_km,
     b.horas_de_uso,
     CASE 
-        WHEN b.kilometraje_km > 5000 THEN 'CRÍTICO'
+        WHEN b.kilometraje_km > 5000 THEN 'CRÃTICO'
         WHEN b.kilometraje_km > 3000 THEN 'ALTO'
         WHEN b.kilometraje_km > 1000 THEN 'MEDIO'
         ELSE 'BAJO'
@@ -524,12 +533,12 @@ SELECT
     b.modelo,
     ce.nombre AS condicion_especial,
     CASE 
-        WHEN b.tamano_del_marco_cm < 40 THEN 'Marco pequeño'
+        WHEN b.tamano_del_marco_cm < 40 THEN 'Marco pequeÃ±o'
         WHEN b.tamano_del_marco_cm BETWEEN 40 AND 60 THEN 'Marco mediano'
         ELSE 'Marco grande'
     END AS categoria_marco,
     CASE 
-        WHEN b.es_electrica = 1 THEN 'Eléctrica'
+        WHEN b.es_electrica = 1 THEN 'ElÃ©ctrica'
         ELSE 'Convencional'
     END AS tipo_bicicleta
 FROM bicicletas b
@@ -608,7 +617,7 @@ SELECT
     a.tarifa_total,
     DATEDIFF(DAY, a.fecha_de_inicio_de_vigencia, a.fecha_de_fin_de_vigencia) AS duracion_dias,
     CASE 
-        WHEN DATEDIFF(DAY, a.fecha_de_inicio_de_vigencia, a.fecha_de_fin_de_vigencia) = 0 THEN 'Uso de un solo día'
+        WHEN DATEDIFF(DAY, a.fecha_de_inicio_de_vigencia, a.fecha_de_fin_de_vigencia) = 0 THEN 'Uso de un solo dÃ­a'
         WHEN DATEDIFF(DAY, a.fecha_de_inicio_de_vigencia, a.fecha_de_fin_de_vigencia) BETWEEN 1 AND 3 THEN 'Alquiler corto'
         ELSE 'Alquiler extendido'
     END AS categoria_duracion
@@ -629,8 +638,8 @@ SELECT
     p.primer_nombre + ' ' + p.primer_apellido AS nombre_usuario,
     ISNULL(CONVERT(VARCHAR, po.version_de_los_terminos), 'N/A') AS version_politica,
     CASE 
-        WHEN ap.id_politica IS NULL THEN 'No aceptó ninguna política'
-        ELSE 'Aceptó la versión ' + CONVERT(VARCHAR, po.version_de_los_terminos)
+        WHEN ap.id_politica IS NULL THEN 'No aceptÃ³ ninguna polÃ­tica'
+        ELSE 'AceptÃ³ la versiÃ³n ' + CONVERT(VARCHAR, po.version_de_los_terminos)
     END AS estado_aceptacion
 FROM personas p
 LEFT JOIN aceptaciones_de_las_politicas ap ON p.id_persona = ap.id_persona
@@ -643,7 +652,7 @@ CREATE OR ALTER VIEW vw_usuarios_con_recorridos_y_participaciones AS
 SELECT DISTINCT 
     p.id_persona,
     p.primer_nombre + ' ' + p.primer_apellido AS nombre_usuario,
-    'Participó en recorridos' AS tipo_actividad
+    'ParticipÃ³ en recorridos' AS tipo_actividad
 FROM participaciones pa
 JOIN usuarios u ON pa.id_usuario = u.id_persona
 JOIN personas p ON u.id_persona = p.id_persona
@@ -651,7 +660,7 @@ UNION
 SELECT DISTINCT 
     p.id_persona,
     p.primer_nombre + ' ' + p.primer_apellido,
-    'Guió recorridos' AS tipo_actividad
+    'GuiÃ³ recorridos' AS tipo_actividad
 FROM guias_de_los_recorridos gr
 JOIN guias g ON gr.id_guia = g.id_persona
 JOIN personas p ON g.id_persona = p.id_persona;

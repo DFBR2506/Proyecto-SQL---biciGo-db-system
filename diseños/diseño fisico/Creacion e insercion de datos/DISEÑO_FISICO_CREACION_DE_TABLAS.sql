@@ -243,7 +243,7 @@ CREATE TABLE estados_fisicos_tomados_por_las_bicicletas (
 );
 
 -- ====== (1) PK compuesta -> PK propia + UNIQUE
-CREATE TABLE accesorios_de_la_bicicleta (
+CREATE TABLE accesorios_de_las_bicicletas (
     id_accesorio_de_la_bicicleta INT IDENTITY(1,1) PRIMARY KEY,
     id_bicicleta INT NOT NULL,
     id_accesorio INT NOT NULL,

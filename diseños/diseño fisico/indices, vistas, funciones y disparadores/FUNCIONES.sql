@@ -100,22 +100,54 @@ RETURN
     WHERE b.tarifa_base_de_alquiler BETWEEN @precio_min AND @precio_max;
 GO
 
---6  Años de experiencia de un guia a partir de su registro.
-CREATE FUNCTION fn_ExperienciaRealGuia (@id_guia INT)
-RETURNS INT
+--6 calcular la calificación promedio para bicicletas, guías o rutas.
+CREATE FUNCTION dbo.calcular_calificación_promedio(@id_comentable INT, @tipo_comentable VARCHAR(20))
+RETURNS DECIMAL(3,2)
 AS
 BEGIN
-    DECLARE @inicio DATE;
-    SELECT @inicio = p.fecha_de_registro
-    FROM personas p
-    JOIN guias g ON g.id_persona = p.id_persona
-    WHERE g.id_persona = @id_guia;
+    SET @tipo_comentable = LOWER(@tipo_comentable);
+    IF (@tipo_comentable IN ('bicicleta', 'guia', 'guía', 'ruta'))
+    BEGIN
+        DECLARE @cantidad_comentarios INT, @suma_calificaciones INT, @promedio DECIMAL(3,2);
 
-    RETURN DATEDIFF(YEAR, @inicio, GETDATE());
+        IF (@tipo_comentable = 'bicicleta')
+        BEGIN
+            SELECT @cantidad_comentarios = COUNT(*), @suma_calificaciones = SUM(c.calificacion)
+            FROM comentarios_de_las_bicicletas cb
+            JOIN comentarios c ON c.id_comentario = cb.id_comentario
+            WHERE cb.id_bicicleta = @id_comentable
+        END
+        ELSE IF (@tipo_comentable = 'ruta')
+        BEGIN
+            SELECT @cantidad_comentarios = COUNT(*), @suma_calificaciones = SUM(c.calificacion)
+            FROM comentarios_de_las_rutas_turisticas cr
+            JOIN comentarios c ON c.id_comentario = cr.id_comentario
+            WHERE cr.id_ruta_turistica = @id_comentable
+        END
+        ELSE
+        BEGIN
+            SELECT @cantidad_comentarios = COUNT(*), @suma_calificaciones = SUM(c.calificacion)
+            FROM comentarios_de_los_guias cg
+            JOIN comentarios c ON c.id_comentario = cg.id_comentario
+            WHERE cg.id_guia = @id_comentable
+        END;
+    END
+    ELSE
+    BEGIN
+        RETURN NULL;
+    END;
+
+    IF (@cantidad_comentarios = 0 OR @cantidad_comentarios IS NULL)
+    BEGIN
+        RETURN NULL;
+    END
+    
+    SET @promedio = CAST(@suma_calificaciones AS DECIMAL(10,2)) / CAST(@cantidad_comentarios AS DECIMAL(10,2));
+    RETURN @promedio;
+
 END;
 GO
-
-
+    
 -- 7. Guias Disponibles por Ciudad
 
 CREATE FUNCTION fn_GuiasDisponiblesPorCiudad(@idCiudad INT)

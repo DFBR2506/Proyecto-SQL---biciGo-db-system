@@ -1,5 +1,5 @@
 --1. proximo mantenimiento de bicicletas
-CREATE FUNCTION fn_ProximoMantenimientoBicicleta(@idBicicleta INT)
+CREATE FUNCTION dbo.calcular_kilometraje_hasta_proximo_mantenimiento(@idBicicleta INT)
 RETURNS INT
 AS
 BEGIN
@@ -22,25 +22,24 @@ END;
 GO
 
 --2. Tiempo de uso de bicicletas
-CREATE FUNCTION fn_TiempoUsoBicicleta(@idBicicleta INT)
+CREATE FUNCTION dbo.calcular_horas_en_alquiler(@idBicicleta INT)
 RETURNS INT
 AS
 BEGIN
-    DECLARE @dias INT;
+    DECLARE @horas INT;
 
-    SELECT @dias = SUM(DATEDIFF(DAY, 
+    SELECT @horas = SUM(DATEDIFF(HOUR, 
         fecha_de_inicio_de_vigencia, 
         fecha_de_fin_de_vigencia))
     FROM alquileres
     WHERE id_bicicleta = @idBicicleta
       AND fecha_de_inicio_de_vigencia IS NOT NULL
       AND fecha_de_fin_de_vigencia IS NOT NULL;
-
-    RETURN ISNULL(@dias, 0);
+    RETURN ISNULL(@horas, 0);
 END;
 GO
 
---3. Calcular el precio total de alquiler según horas
+--3. Calcular el precio total de alquiler segÃºn horas
 CREATE FUNCTION fn_CalcularPrecioAlquiler (
     @tarifa_base DECIMAL(10,2),
     @horas INT,
@@ -58,7 +57,7 @@ GO
 
 
 
---4 Evaluar si un usuario puede alquilar (activo + mayor de edad + aceptó política vigente). 
+--4 Evaluar si un usuario puede alquilar (activo + mayor de edad + aceptÃ³ polÃ­tica vigente). 
 CREATE FUNCTION fn_PuedeAlquilar (@id_persona INT)
 RETURNS BIT
 AS
@@ -97,7 +96,7 @@ BEGIN
 END;
 GO
 
---6  Años de experiencia de un guia a partir de su registro.
+--6  AÃ±os de experiencia de un guia a partir de su registro.
 CREATE FUNCTION fn_ExperienciaRealGuia (@id_guia INT)
 RETURNS INT
 AS

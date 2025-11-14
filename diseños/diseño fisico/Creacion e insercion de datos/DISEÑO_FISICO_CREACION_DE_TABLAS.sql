@@ -207,8 +207,8 @@ CREATE TABLE disponibilidades_tomadas_por_las_bicicletas (
     id_disponibilidad_de_la_bicicleta INT IDENTITY (1,1) PRIMARY KEY,
     id_estado_de_disponibilidad_de_la_bicicleta INT NOT NULL,
     id_bicicleta INT NOT NULL,
-    fecha_inicio_del_estado DATE NOT NULL DEFAULT GETDATE(),
-    fecha_fin_del_estado DATE NULL,
+    fecha_inicio_del_estado DATETIME NOT NULL DEFAULT GETDATE(),
+    fecha_fin_del_estado DATETIME NULL,
      CONSTRAINT FK_fk1b1 FOREIGN KEY (id_bicicleta)
         REFERENCES bicicletas(id_bicicleta)
         ON UPDATE CASCADE
@@ -227,8 +227,8 @@ CREATE TABLE estados_fisicos_tomados_por_las_bicicletas (
     id_estado_fisico_tomado_por_la_bicicleta INT IDENTITY (1,1) PRIMARY KEY,
     id_estado_fisico_bicicleta INT NOT NULL,
     id_bicicleta INT NOT NULL,
-    fecha_inicio_del_estado DATE NOT NULL DEFAULT GETDATE(),
-       fecha_fin_del_estado DATE NULL,
+    fecha_inicio_del_estado DATETIME NOT NULL DEFAULT GETDATE(),
+    fecha_fin_del_estado DATETIME NULL,
      CONSTRAINT FK_fk1bb FOREIGN KEY (id_bicicleta)
         REFERENCES bicicletas(id_bicicleta)
         ON UPDATE CASCADE
@@ -289,8 +289,8 @@ CREATE TABLE tipos_de_mantenimiento (
 CREATE TABLE mantenimientos (
     id_mantenimiento INT IDENTITY(1,1) PRIMARY KEY,
     descripcion VARCHAR(255) NOT NULL,
-    fecha_de_inicio DATE NOT NULL,
-    fecha_de_fin DATE NULL,
+    fecha_de_inicio DATETIME NOT NULL,
+    fecha_de_fin DATETIME NULL,
     id_tipo_de_mantenimiento INT NOT NULL,
     id_bicicleta INT NOT NULL,
 
@@ -304,7 +304,7 @@ CREATE TABLE mantenimientos (
         ON UPDATE CASCADE
         ON DELETE CASCADE,
 
-    CONSTRAINT chk_fechas_mantenimiento CHECK (fecha_de_fin IS NULL OR fecha_de_inicio <= fecha_de_fin),
+    CONSTRAINT chk_fechas_mantenimiento CHECK (fecha_de_fin IS NULL OR fecha_de_inicio < fecha_de_fin),
     CONSTRAINT chk_descripcion_mantenimiento CHECK (TRIM(descripcion) <> '')
 );
 
@@ -484,8 +484,8 @@ CREATE TABLE disponibilidades_tomadas_por_los_guias (
     id_disponibilidad_del_guia INT IDENTITY (1,1) PRIMARY KEY,
     id_estado_de_disponibilidad_del_guia INT NOT NULL,
     id_guia INT NOT NULL,
-    fecha_inicio_del_estado DATE NOT NULL DEFAULT GETDATE(),
-    fecha_fin_del_estado DATE NULL, 
+    fecha_inicio_del_estado DATETIME NOT NULL DEFAULT GETDATE(),
+    fecha_fin_del_estado DATETIME NULL, 
      CONSTRAINT FK_fk1g FOREIGN KEY (id_guia)
         REFERENCES guias(id_persona)
         ON UPDATE CASCADE
@@ -544,7 +544,7 @@ CREATE TABLE reportes (
     id_reporte INT IDENTITY(1,1) PRIMARY KEY,
     titulo VARCHAR(200) NOT NULL,
     descripcion VARCHAR(1000) NULL,
-    fecha_de_creacion DATE NOT NULL,
+    fecha_de_creacion DATETIME NOT NULL,
     id_persona INT NOT NULL,
     id_bicicleta INT NOT NULL,
      CONSTRAINT FK_reportes_persona FOREIGN KEY (id_persona)
@@ -563,8 +563,8 @@ CREATE TABLE estados_tomados_por_los_reportes (
     id_estado_tomado_por_el_reporte INT IDENTITY (1,1) PRIMARY KEY,
     id_estado_del_reporte INT NOT NULL,
     id_reporte INT NOT NULL,
-    fecha_inicio_del_estado DATE NOT NULL DEFAULT GETDATE(),
-       fecha_fin_del_estado DATE NULL,
+    fecha_inicio_del_estado DATETIME NOT NULL DEFAULT GETDATE(),
+    fecha_fin_del_estado DATETIME NULL,
      CONSTRAINT FK_fk1rp FOREIGN KEY (id_reporte)
         REFERENCES reportes(id_reporte)
         ON UPDATE CASCADE
@@ -620,14 +620,14 @@ CREATE TABLE planes_de_los_alquileres (
 
 CREATE TABLE alquileres (
     id_alquiler INT IDENTITY(1,1) PRIMARY KEY,
-    fecha_de_inicio_de_vigencia DATE NOT NULL,
-    fecha_de_fin_de_vigencia DATE NOT NULL,
+    fecha_de_inicio_de_vigencia DATETIME NOT NULL,
+    fecha_de_fin_de_vigencia DATETIME NOT NULL,
     id_plan INT NOT NULL,
     id_usuario INT NOT NULL,
     id_bicicleta INT NOT NULL,
     id_metodo_de_pago INT NOT NULL,
     tarifa_total DECIMAL  (12,2) NOT NULL,
-    fecha_de_liquidacion DATE NOT NULL DEFAULT GETDATE(),
+    fecha_de_liquidacion DATETIME NOT NULL DEFAULT GETDATE(),
     CONSTRAINT FK_alquileres_plan FOREIGN KEY (id_plan)
         REFERENCES planes_de_los_alquileres(id_plan)
         ON UPDATE NO ACTION
@@ -644,8 +644,7 @@ CREATE TABLE alquileres (
         REFERENCES metodos_de_pago(id_metodo_pago)
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
-    CONSTRAINT CHK_alquileres_fechas CHECK (fecha_de_inicio_de_vigencia <= fecha_de_fin_de_vigencia)
-
+    CONSTRAINT CHK_alquileres_fechas CHECK (fecha_de_inicio_de_vigencia < fecha_de_fin_de_vigencia)
 );
 
 CREATE TABLE estados_de_los_alquileres (
@@ -658,8 +657,8 @@ CREATE TABLE estados_tomados_por_los_alquileres (
     id_estado_tomado_por_el_alquiler INT IDENTITY (1,1),
     id_estado_del_alquiler INT NOT NULL,
     id_alquiler INT NOT NULL,
-    fecha_inicio_del_estado DATE NOT NULL DEFAULT GETDATE(),
-    fecha_fin_del_estado DATE NULL,
+    fecha_inicio_del_estado DATETIME NOT NULL DEFAULT GETDATE(),
+    fecha_fin_del_estado DATETIME NULL,
     CONSTRAINT PK_primary_key PRIMARY KEY (id_estado_tomado_por_el_alquiler),
     CONSTRAINT FK_foreign_key_1 FOREIGN KEY (id_estado_del_alquiler) REFERENCES 
     estados_de_los_alquileres (id_estado_del_alquiler)
@@ -671,7 +670,7 @@ CREATE TABLE estados_tomados_por_los_alquileres (
     ON DELETE NO ACTION,
      CONSTRAINT CHK_CHECK1EA CHECK (
     fecha_fin_del_estado IS NULL 
-    OR fecha_fin_del_estado >= fecha_inicio_del_estado)
+    OR fecha_fin_del_estado > fecha_inicio_del_estado)
 );
 
 
@@ -700,7 +699,7 @@ CREATE TABLE rutas_turisticas (
     nombre VARCHAR(200) NOT NULL UNIQUE,
     descripcion VARCHAR(800) NULL,
     distancia_total_mi DECIMAL(8,2) NOT NULL,
-     distancia_total_km DECIMAL(8,2) NOT NULL,
+    distancia_total_km DECIMAL(8,2) NOT NULL,
     id_nivel_dificultad INT NOT NULL,
     activo BIT NOT NULL DEFAULT 1,
     CONSTRAINT FK_rutas_nivel_dificultad FOREIGN KEY (id_nivel_dificultad)
@@ -786,8 +785,8 @@ CREATE TABLE estados_tomados_por_las_participaciones (
     id_estado_tomado_por_la_participacion INT IDENTITY (1,1) PRIMARY KEY,
     id_estado_de_participacion INT NOT NULL,
     id_participacion INT NOT NULL,
-    fecha_inicio_del_estado DATE NOT NULL DEFAULT GETDATE(),
-       fecha_fin_del_estado DATE NULL,
+    fecha_inicio_del_estado DATETIME NOT NULL DEFAULT GETDATE(),
+    fecha_fin_del_estado DATETIME NULL,
      CONSTRAINT FK_fk1p FOREIGN KEY (id_participacion)
         REFERENCES participaciones(id_participacion)
         ON UPDATE CASCADE
@@ -812,8 +811,8 @@ CREATE TABLE estados_tomados_por_los_recorridos (
     id_estado_tomado_por_el_recorrido INT IDENTITY (1,1) PRIMARY KEY,
     id_estado_del_recorrido INT NOT NULL,
     id_recorrido INT NOT NULL,
-    fecha_inicio_del_estado DATE NOT NULL DEFAULT GETDATE(),
-       fecha_fin_del_estado DATE NULL,
+    fecha_inicio_del_estado DATETIME NOT NULL DEFAULT GETDATE(),
+    fecha_fin_del_estado DATETIME NULL,
      CONSTRAINT FK_fk1r FOREIGN KEY (id_estado_del_recorrido)
         REFERENCES estados_de_los_recorridos(id_estado_del_recorrido)
         ON UPDATE CASCADE
@@ -844,7 +843,7 @@ CREATE TABLE comentarios (
     id_comentable INT NOT NULL,   
     calificacion INT NOT NULL,
     descripcion VARCHAR(1000) NULL,
-    fecha_de_creacion DATE NOT NULL DEFAULT GETDATE(),
+    fecha_de_creacion DATETIME NOT NULL DEFAULT GETDATE(),
     visible BIT NOT NULL DEFAULT 1,
     CONSTRAINT CHK_comentarios_calificacion CHECK (calificacion BETWEEN 0 AND 5),
     CONSTRAINT CHK_comentarios_descripcion CHECK (descripcion IS NULL OR LTRIM(RTRIM(descripcion)) <> ''),
@@ -939,7 +938,7 @@ CREATE TABLE archivos_multimedia (
     URL VARCHAR(300) NOT NULL,
     tamano_en_mb DECIMAL(10,2) NOT NULL,
     id_formato_de_archivo INT NOT NULL,
-    fecha_de_creacion DATE NULL,
+    fecha_de_creacion DATETIME NULL,
     pertenece_a_una_bicicleta BIT NOT NULL,
     visible BIT NOT NULL DEFAULT 1,
     CONSTRAINT FK_archivos_multimedia_formato FOREIGN KEY (id_formato_de_archivo)

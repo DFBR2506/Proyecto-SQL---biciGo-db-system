@@ -452,7 +452,7 @@ INSERT INTO politicas (version_de_los_terminos, fecha_de_creacion, url_politica)
 (2, '2024-07-10', 'https://bicigo.co/politicas/v2'),
 (3, '2025-02-05', 'https://bicigo.co/politicas/v3'),
 (4, '2025-09-20', 'https://bicigo.co/politicas/v4'),
-(5, '2025-011-01', 'https://bicigo.co/politicas/v5');
+(5, '2025-11-01', 'https://bicigo.co/politicas/v5');
 
 -- metodos_de_pago
 INSERT INTO metodos_de_pago (nombre, es_transferencia, activo) VALUES

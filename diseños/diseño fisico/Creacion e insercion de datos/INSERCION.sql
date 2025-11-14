@@ -1254,27 +1254,16 @@ INSERT INTO alquileres (
 )
 SELECT
     v.fecha_inicio,
-    DATEADD(
         CASE v.id_plan
-            WHEN 1 THEN HOUR
-            WHEN 2 THEN DAY
-            WHEN 3 THEN DAY
-            WHEN 4 THEN DAY
-            WHEN 5 THEN DAY
-            WHEN 6 THEN MONTH
-            WHEN 7 THEN YEAR
-        END,
-        CASE v.id_plan
-            WHEN 1 THEN 1        -- 1 hora
-            WHEN 2 THEN 1        -- 1 día
-            WHEN 3 THEN 3        -- 3 días
-            WHEN 4 THEN 5        -- 5 días
-            WHEN 5 THEN 7        -- 1 semana
-            WHEN 6 THEN 1        -- 1 mes
-            WHEN 7 THEN 1        -- 1 año
-        END,
-        v.fecha_inicio
-    ) AS fecha_fin,
+            WHEN 1 THEN DATEADD(HOUR, 1, v.fecha_inicio)        
+            WHEN 2 THEN DATEADD(DAY, 1, v.fecha_inicio)           
+            WHEN 3 THEN DATEADD(DAY, 3, v.fecha_inicio)           
+            WHEN 4 THEN DATEADD(DAY, 5, v.fecha_inicio)           
+            WHEN 5 THEN DATEADD(DAY, 7, v.fecha_inicio)           
+            WHEN 6 THEN DATEADD(MONTH, 1, v.fecha_inicio)           
+            WHEN 7 THEN DATEADD(YEAR, 1, v.fecha_inicio)           
+        END
+    AS fecha_fin,
     v.id_plan,
     v.id_usuario,
     v.id_bicicleta,

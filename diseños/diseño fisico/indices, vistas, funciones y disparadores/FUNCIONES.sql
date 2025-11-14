@@ -83,21 +83,21 @@ BEGIN
 END;
 GO
 
---5 Si una bicicleta esta disponible o no.
-CREATE FUNCTION fn_EstaAlquilada (@id_bicicleta INT)
-RETURNS BIT
+--5 Bicicletas por rango de precio.
+CREATE FUNCTION dbo.bicicletas_por_rango_de_precio(@precio_min INT, @precio_max INT)
+RETURNS TABLE
 AS
-BEGIN
-    DECLARE @estado VARCHAR(100);
-    SELECT TOP 1 @estado = ed.nombre
-    FROM disponibilidades_tomadas_por_las_bicicletas db
-    JOIN estados_de_disponibilidad_de_las_bicicletas ed 
-        ON db.id_estado_de_disponibilidad_de_la_bicicleta = ed.id_estado_de_disponibilidad_de_la_bicicleta
-    WHERE db.id_bicicleta = @id_bicicleta
-    ORDER BY db.fecha_inicio_del_estado DESC;
-
-    RETURN CASE WHEN @estado = 'En alquiler' THEN 1 ELSE 0 END;
-END;
+RETURN
+    SELECT b.id_bicicleta AS [id bicicleta],
+    b.numero_de_cuadro AS [número de cuadro],
+    b.modelo AS [modelo],
+    CASE b.es_electrica
+        WHEN 1 THEN 'si'
+        WHEN 0 THEN 'no'
+    END AS [es electrica?],
+    b.tarifa_base_de_alquiler AS [tarifa base de alquiler]
+    FROM bicicletas b 
+    WHERE b.tarifa_base_de_alquiler BETWEEN @precio_min AND @precio_max;
 GO
 
 --6  Años de experiencia de un guia a partir de su registro.

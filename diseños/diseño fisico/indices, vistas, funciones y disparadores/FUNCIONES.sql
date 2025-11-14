@@ -40,7 +40,7 @@ END;
 GO
 
 --3. Calcular el precio total de alquiler según horas
-CREATE FUNCTION fn_CalcularPrecioAlquiler (
+CREATE FUNCTION dbo.calcular_tarifa_total_horas (
     @tarifa_base DECIMAL(10,2),
     @horas INT,
     @es_electrica BIT
@@ -55,27 +55,31 @@ BEGIN
 END;
 GO
 
-
-
 --4 Evaluar si un usuario puede alquilar (activo + mayor de edad + aceptó política vigente). 
-CREATE FUNCTION fn_PuedeAlquilar (@id_persona INT)
+CREATE FUNCTION dbo.puede_alquilar(@id_persona INT)
 RETURNS BIT
 AS
 BEGIN
-    DECLARE @activo BIT, @fecha_nacimiento DATE, @mayor BIT, @ultima_politica INT, @acepto BIT;
 
-    SELECT @activo = p.activo, @fecha_nacimiento = p.fecha_de_nacimiento
-    FROM personas p WHERE p.id_persona = @id_persona;
+    DECLARE @fecha_nacimiento DATE, @es_mayor BIT, @ultima_version_terminos INT, @acepto BIT;
+    
+    SELECT @fecha_nacimiento = p.fecha_de_nacimiento FROM personas p WHERE p.id_persona = @id_persona;
 
-    SET @mayor = dbo.fn_EsMayorDeEdad(@fecha_nacimiento);
+    IF (DATEADD(YEAR, 18, @fecha_nacimiento) > GETDATE())
+    BEGIN
+        SET @es_mayor = 0;
+    END
+    ELSE
+    BEGIN
+        SET @es_mayor = 1;
+    END
 
-    SELECT @ultima_politica = MAX(id_politica) FROM politicas;
-
+    SELECT @ultima_version_terminos = MAX(id_politica) FROM politicas;
     SELECT @acepto = CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
     FROM aceptaciones_de_las_politicas 
-    WHERE id_persona = @id_persona AND id_politica = @ultima_politica;
+    WHERE id_persona = @id_persona AND id_politica = @ultima_version_terminos;
 
-    RETURN CASE WHEN @activo = 1 AND @mayor = 1 AND @acepto = 1 THEN 1 ELSE 0 END;
+    RETURN CASE WHEN @es_mayor = 1 AND @acepto = 1 THEN 1 ELSE 0 END;
 END;
 GO
 

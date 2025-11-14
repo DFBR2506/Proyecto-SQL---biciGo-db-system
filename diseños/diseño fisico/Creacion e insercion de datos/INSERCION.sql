@@ -1200,13 +1200,13 @@ INSERT INTO condiciones_de_las_bicicletas (id_bicicleta, id_condicion_especial) 
 
 -- mantenimientos
 INSERT INTO mantenimientos (descripcion, fecha_de_inicio, fecha_de_fin, id_tipo_de_mantenimiento, id_bicicleta) VALUES
-('Ajuste de frenos y cambio de cables', '2025-02-10', '2025-02-12', 4, 2),
-('Cambio de llantas tras desgaste', '2025-01-15', '2025-01-18', 2, 3),
-('Lubricación de cadena y revisión general', '2025-02-20', '2025-02-20', 1, 5),
-('Revisión eléctrica del sistema de asistencia', '2025-02-25', '2025-02-27', 3, 6),
-('Sustitución de pedales', '2025-03-01', '2025-03-02', 2, 7),
-('Limpieza y ajuste de transmisión', '2025-03-03', '2025-03-04', 1, 10),
-('Revisión preventiva completa', '2025-03-05', NULL, 1, 12);
+('Ajuste de frenos y cambio de cables', '2025-02-10 09:00:00', '2025-02-12 16:30:00', 4, 2),
+('Cambio de llantas tras desgaste', '2025-01-15 08:40:00', '2025-01-18 15:10:00', 2, 3),
+('Lubricación de cadena y revisión general', '2025-02-20 10:15:00', '2025-02-20 13:45:00', 1, 5),
+('Revisión eléctrica del sistema de asistencia', '2025-02-25 09:20:00', '2025-02-27 17:00:00', 3, 6),
+('Sustitución de pedales', '2025-03-01 08:50:00', '2025-03-02 11:30:00', 2, 7),
+('Limpieza y ajuste de transmisión', '2025-03-03 09:10:00', '2025-03-04 14:55:00', 1, 10),
+('Revisión preventiva completa', '2025-03-05 08:30:00', NULL, 1, 12);
 
 -- reportes
 INSERT INTO reportes (titulo, descripcion, fecha_de_creacion, id_persona, id_bicicleta) VALUES

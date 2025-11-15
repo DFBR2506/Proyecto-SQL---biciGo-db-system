@@ -1,5 +1,5 @@
 --1. proximo mantenimiento de bicicletas
-CREATE FUNCTION dbo.calcular_kilometraje_hasta_proximo_mantenimiento(@idBicicleta INT)
+CREATE OR ALTER FUNCTION dbo.calcular_kilometraje_hasta_proximo_mantenimiento(@idBicicleta INT)
 RETURNS INT
 AS
 BEGIN
@@ -22,7 +22,7 @@ END;
 GO
 
 --2. Tiempo de uso de bicicletas
-CREATE FUNCTION dbo.calcular_horas_en_alquiler(@idBicicleta INT)
+CREATE OR ALTER FUNCTION dbo.calcular_horas_en_alquiler(@idBicicleta INT)
 RETURNS INT
 AS
 BEGIN
@@ -40,7 +40,7 @@ END;
 GO
 
 --3. Calcular el precio total de alquiler según horas
-CREATE FUNCTION dbo.calcular_tarifa_total_horas (
+CREATE OR ALTER FUNCTION dbo.calcular_tarifa_total_horas (
     @tarifa_base DECIMAL(10,2),
     @horas INT,
     @es_electrica BIT
@@ -56,7 +56,7 @@ END;
 GO
 
 --4 Evaluar si un usuario puede alquilar (activo + mayor de edad + aceptó política vigente). 
-CREATE FUNCTION dbo.puede_alquilar(@id_persona INT)
+CREATE OR ALTER FUNCTION dbo.puede_alquilar(@id_persona INT)
 RETURNS BIT
 AS
 BEGIN
@@ -84,7 +84,7 @@ END;
 GO
 
 --5 Bicicletas por rango de precio.
-CREATE FUNCTION dbo.bicicletas_por_rango_de_precio(@precio_min INT, @precio_max INT)
+CREATE OR ALTER FUNCTION dbo.bicicletas_por_rango_de_precio(@precio_min INT, @precio_max INT)
 RETURNS TABLE
 AS
 RETURN
@@ -97,11 +97,11 @@ RETURN
     END AS [es electrica?],
     b.tarifa_base_de_alquiler AS [tarifa base de alquiler]
     FROM bicicletas b 
-    WHERE b.tarifa_base_de_alquiler BETWEEN @precio_min AND @precio_max;
+    WHERE b.tarifa_base_de_alquiler BETWEEN @precio_min AND @precio_max AND b.activo = 1;
 GO
 
 --6 calcular la calificación promedio para bicicletas, guías o rutas.
-CREATE FUNCTION dbo.calcular_calificación_promedio(@id_comentable INT, @tipo_comentable VARCHAR(20))
+CREATE OR ALTER FUNCTION dbo.calcular_calificación_promedio(@id_comentable INT, @tipo_comentable VARCHAR(20))
 RETURNS DECIMAL(3,2)
 AS
 BEGIN
@@ -147,91 +147,85 @@ BEGIN
 
 END;
 GO
-    
--- 7. Guias Disponibles por Ciudad
 
-CREATE FUNCTION fn_GuiasDisponiblesPorCiudad(@idCiudad INT)
+-- 7. buscar guias que hablen un idioma
+CREATE OR ALTER FUNCTION dbo.listar_guias_por_idioma(@nombre_idioma VARCHAR(30))
 RETURNS TABLE
 AS
 RETURN
 (
+    WITH idiomas_guia AS
+    (
+    SELECT g.id_persona AS [id guía], COUNT(*) AS [cuenta]
+    FROM idiomas i 
+    JOIN idiomas_de_los_guias idg ON idg.id_idioma = i.id_idioma
+    JOIN guias g ON g.id_persona = idg.id_guia
+    WHERE LOWER(i.nombre) = LOWER(@nombre_idioma) AND g.activo = 1
+    GROUP BY g.id_persona
+    )
     SELECT 
-        p.id_persona AS id_guia,
-        p.primer_nombre + ' ' + p.primer_apellido AS nombre_completo,
-        c.nombre AS ciudad,
-        g.anios_de_experiencia,
-        g.numero_de_tarjeta_profesional,
-        CASE 
-            WHEN g.activo = 1 THEN 'Disponible'
-            ELSE 'Inactivo'
-        END AS estado_disponibilidad
-    FROM guias AS g
-    INNER JOIN personas AS p
-        ON g.id_persona = p.id_persona
-    INNER JOIN documentos_de_identificacion AS d
-        ON p.id_documento_de_identificacion = d.id_documento_de_identificacion
-    INNER JOIN ciudades AS c
-        ON d.id_ciudad_de_expedicion = c.id_ciudad
-    WHERE c.id_ciudad = @idCiudad
-      AND g.activo = 1
+        p.id_persona AS [id guía],
+        p.primer_nombre + ' ' + p.primer_apellido AS [nombre completo],
+        g.numero_de_tarjeta_profesional AS [número de tarjeta profesional]
+    FROM idiomas_guia AS ig
+    JOIN guias g ON ig.[id guía] = g.id_persona
+    JOIN personas p ON p.id_persona = g.id_persona
 );
 GO
 
-
 -- 8. Bicicletas disponibles por ciudad
-CREATE OR ALTER FUNCTION fn_BicicletasDisponiblesPorCiudad(@nombreCiudad VARCHAR(100))
+CREATE OR ALTER FUNCTION dbo.bicicletas_disponibles_por_ciudad(@nombre_ciudad VARCHAR(40))
 RETURNS TABLE
 AS
 RETURN
 (
-    SELECT 
-        b.id_bicicleta, 
-        b.modelo, 
-        m.nombre AS marca, 
-        pa.nombre AS punto_alquiler
-    FROM bicicletas b
+    SELECT pa.nombre AS [punto de alquiler],
+    id_bicicleta AS [id bicicleta],
+    m.nombre AS [marca],
+    b.modelo AS [modelo]
+    FROM ciudades c
+    JOIN puntos_de_alquiler pa ON pa.id_ciudad = c.id_ciudad
+    JOIN bicicletas b ON b.id_punto_de_alquiler = pa.id_punto_alquiler
     JOIN marcas m ON b.id_marca = m.id_marca
-    JOIN puntos_de_alquiler pa ON pa.id_punto_alquiler = b.id_punto_de_alquiler
-    JOIN ciudades c ON pa.id_ciudad = c.id_ciudad
-    WHERE c.nombre = @nombreCiudad AND b.activo = 1
+    WHERE LOWER(@nombre_ciudad) = LOWER(c.nombre) AND b.activo = 1
 );
 GO
 
 
 -- 9. Historial de mantenimientos de una bicicleta
-CREATE OR ALTER FUNCTION fn_HistorialMantenimientosBicicleta(@id_bicicleta INT)
+CREATE OR ALTER FUNCTION dbo.historial_de_mantenimiento_bicicleta(@id_bicicleta INT)
 RETURNS TABLE
 AS
 RETURN
 (
-    SELECT 
-        m.descripcion, 
-        tm.nombre AS tipo_mantenimiento, 
-        m.fecha_de_inicio, 
-        m.fecha_de_fin
+    SELECT m.descripcion AS [descripción], 
+    tm.nombre AS [tipo de mantenimiento], 
+    m.fecha_de_inicio [fecha de inicio], 
+    m.fecha_de_fin [fecha de fin]
     FROM mantenimientos m
-    JOIN tipos_de_mantenimiento tm 
-        ON m.id_tipo_de_mantenimiento = tm.id_tipo_de_mantenimiento
-    WHERE m.id_bicicleta = @id_bicicleta
-    ORDER BY m.fecha_de_inicio DESC
+    JOIN tipos_de_mantenimiento tm ON m.id_tipo_de_mantenimiento = tm.id_tipo_de_mantenimiento
+    JOIN bicicletas b ON b.id_bicicleta = m.id_bicicleta
+    WHERE m.id_bicicleta = @id_bicicleta AND b.activo = 1
 );
 GO
 
--- 10. Alquileres activos por usuario
-CREATE OR ALTER FUNCTION fn_AlquileresActivosPorUsuario(@id_usuario INT)
+-- 10. recorridos según ruta
+CREATE OR ALTER FUNCTION dbo.recorridos_por_ruta(@nombre_ruta VARCHAR(50))
 RETURNS TABLE
 AS
 RETURN
 (
-    SELECT 
-        a.id_alquiler, 
-        b.modelo, 
-        a.fecha_de_inicio_de_vigencia, 
-        a.fecha_de_fin_de_vigencia, 
-        a.tarifa_total
-    FROM alquileres a
-    JOIN bicicletas b ON a.id_bicicleta = b.id_bicicleta
-    WHERE a.id_usuario = @id_usuario
-      AND GETDATE() BETWEEN a.fecha_de_inicio_de_vigencia AND a.fecha_de_fin_de_vigencia
+    SELECT r.id_recorrido AS [id del recorrido],
+    r.fecha_de_realizacion AS [fecha de realización],
+    r.hora_de_inicio AS [hora de inicio],
+    r.hora_de_finalizacion AS [hora de finalización],
+    COUNT(DISTINCT p.id_participacion) AS [cantidad de participantes],
+    COUNT(DISTINCT gr.id_guia) AS [cantidad de guías designados]
+    FROM rutas_turisticas rt
+    JOIN recorridos r ON r.id_ruta_turistica = rt.id_ruta_turistica
+    JOIN participaciones p ON r.id_recorrido = p.id_recorrido
+    JOIN guias_de_los_recorridos gr ON gr.id_recorrido = r.id_recorrido
+    WHERE LOWER(rt.nombre) = LOWER(@nombre_ruta) AND rt.activo = 1
+    GROUP BY r.id_recorrido, r.fecha_de_realizacion, r.hora_de_inicio, r.hora_de_finalizacion
 );
 GO

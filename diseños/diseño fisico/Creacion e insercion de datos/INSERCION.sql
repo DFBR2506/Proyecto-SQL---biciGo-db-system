@@ -1263,7 +1263,7 @@ SELECT
             WHEN 6 THEN DATEADD(MONTH, 1, v.fecha_inicio)           
             WHEN 7 THEN DATEADD(YEAR, 1, v.fecha_inicio)           
         END
-    AS v.fecha_fin,
+    AS fecha_fin,
     v.id_plan,
     v.id_usuario,
     v.id_bicicleta,

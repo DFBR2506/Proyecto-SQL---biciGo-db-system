@@ -88,14 +88,14 @@ CREATE OR ALTER FUNCTION dbo.bicicletas_por_rango_de_precio(@precio_min INT, @pr
 RETURNS TABLE
 AS
 RETURN
-    SELECT b.id_bicicleta AS [id bicicleta],
-    b.numero_de_cuadro AS [número de cuadro],
-    b.modelo AS [modelo],
+    SELECT b.id_bicicleta,
+    b.numero_de_cuadro,
+    b.modelo,
     CASE b.es_electrica
         WHEN 1 THEN 'si'
         WHEN 0 THEN 'no'
-    END AS [es electrica?],
-    b.tarifa_base_de_alquiler AS [tarifa base de alquiler]
+    END AS es_electrica,
+    b.tarifa_base_de_alquiler
     FROM bicicletas b 
     WHERE b.tarifa_base_de_alquiler BETWEEN @precio_min AND @precio_max AND b.activo = 1;
 GO
@@ -154,22 +154,15 @@ RETURNS TABLE
 AS
 RETURN
 (
-    WITH idiomas_guia AS
-    (
-    SELECT g.id_persona AS [id guía], COUNT(*) AS [cuenta]
+    SELECT 
+        p.id_persona AS id_guia,
+        p.primer_nombre + ' ' + p.primer_apellido AS nombre_completo,
+        g.numero_de_tarjeta_profesional
     FROM idiomas i 
     JOIN idiomas_de_los_guias idg ON idg.id_idioma = i.id_idioma
     JOIN guias g ON g.id_persona = idg.id_guia
-    WHERE LOWER(i.nombre) = LOWER(@nombre_idioma) AND g.activo = 1
-    GROUP BY g.id_persona
-    )
-    SELECT 
-        p.id_persona AS [id guía],
-        p.primer_nombre + ' ' + p.primer_apellido AS [nombre completo],
-        g.numero_de_tarjeta_profesional AS [número de tarjeta profesional]
-    FROM idiomas_guia AS ig
-    JOIN guias g ON ig.[id guía] = g.id_persona
     JOIN personas p ON p.id_persona = g.id_persona
+    WHERE LOWER(i.nombre) = LOWER(@nombre_idioma) AND g.activo = 1
 );
 GO
 
@@ -179,10 +172,10 @@ RETURNS TABLE
 AS
 RETURN
 (
-    SELECT pa.nombre AS [punto de alquiler],
-    id_bicicleta AS [id bicicleta],
-    m.nombre AS [marca],
-    b.modelo AS [modelo]
+    SELECT pa.nombre AS punto_de_alquiler,
+    id_bicicleta,
+    m.nombre AS marca,
+    b.modelo
     FROM ciudades c
     JOIN puntos_de_alquiler pa ON pa.id_ciudad = c.id_ciudad
     JOIN bicicletas b ON b.id_punto_de_alquiler = pa.id_punto_alquiler
@@ -198,10 +191,10 @@ RETURNS TABLE
 AS
 RETURN
 (
-    SELECT m.descripcion AS [descripción], 
-    tm.nombre AS [tipo de mantenimiento], 
-    m.fecha_de_inicio [fecha de inicio], 
-    m.fecha_de_fin [fecha de fin]
+    SELECT m.descripcion, 
+    tm.nombre AS tipo_de_mantenimiento, 
+    m.fecha_de_inicio, 
+    m.fecha_de_fin
     FROM mantenimientos m
     JOIN tipos_de_mantenimiento tm ON m.id_tipo_de_mantenimiento = tm.id_tipo_de_mantenimiento
     JOIN bicicletas b ON b.id_bicicleta = m.id_bicicleta
@@ -215,12 +208,12 @@ RETURNS TABLE
 AS
 RETURN
 (
-    SELECT r.id_recorrido AS [id del recorrido],
-    r.fecha_de_realizacion AS [fecha de realización],
-    r.hora_de_inicio AS [hora de inicio],
-    r.hora_de_finalizacion AS [hora de finalización],
-    COUNT(DISTINCT p.id_participacion) AS [cantidad de participantes],
-    COUNT(DISTINCT gr.id_guia) AS [cantidad de guías designados]
+    SELECT r.id_recorrido,
+    r.fecha_de_realizacion,
+    r.hora_de_inicio,
+    r.hora_de_finalizacion,
+    COUNT(DISTINCT p.id_participacion) AS cantidad_de_participantes,
+    COUNT(DISTINCT gr.id_guia) AS cantidad_de_guias_designados
     FROM rutas_turisticas rt
     JOIN recorridos r ON r.id_ruta_turistica = rt.id_ruta_turistica
     JOIN participaciones p ON r.id_recorrido = p.id_recorrido

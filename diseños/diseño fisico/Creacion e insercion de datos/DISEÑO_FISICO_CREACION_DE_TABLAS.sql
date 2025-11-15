@@ -509,7 +509,6 @@ CREATE TABLE idiomas_de_los_guias (
     id_idioma_del_guia INT IDENTITY(1,1) PRIMARY KEY,
     id_guia INT NOT NULL,
     id_idioma INT NOT NULL,
-    nivel_de_dominio VARCHAR(50) NULL,  -- opcional: 'b sico', 'intermedio', 'avanzado', 'nativo'
     
     CONSTRAINT UQ_guias_idiomas UNIQUE (id_guia, id_idioma),
 
@@ -521,12 +520,7 @@ CREATE TABLE idiomas_de_los_guias (
     CONSTRAINT FK_guias_idiomas_idioma FOREIGN KEY (id_idioma)
         REFERENCES idiomas(id_idioma)
         ON UPDATE CASCADE
-        ON DELETE NO ACTION,
-
-    CONSTRAINT CHK_guias_idiomas_nivel CHECK (
-        nivel_de_dominio IS NULL 
-        OR LOWER(nivel_de_dominio) IN ('basico', 'intermedio', 'avanzado', 'nativo')
-    )
+        ON DELETE NO ACTION
 );
 
 

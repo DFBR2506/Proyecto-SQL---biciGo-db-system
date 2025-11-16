@@ -2,82 +2,75 @@
    SECCIÓN A — VISTAS DE AGREGACIÓN Y ANÁLISIS BÁSICO
 ============================================================ */
 
--- 1. Tarifas_promedio_por_uso
-CREATE OR ALTER VIEW Tarifas_promedio_por_uso AS
+-- 1. Tarifas promedio dependiendo del uso
+CREATE OR ALTER VIEW tarifas_promedio_por_uso AS
 SELECT
-	AVG(bici.tarifa_base_de_alquiler) AS Tarifa_promedio,
-	MIN(bici.tarifa_base_de_alquiler) AS Tarifa_Min,
-    MAX(bici.tarifa_base_de_alquiler) AS Tarifa_MMax,
-    tdu.nombre AS Tipo_de_Uso
-FROM bicicletas bici
-JOIN tipos_de_uso tdu ON tdu.id_tipo_de_uso = bici.id_tipo_de_uso
+    tdu.nombre AS tipo_de_uso,
+	ROUND(AVG(b.tarifa_base_de_alquiler),2) AS tarifa_promedio,
+	ROUND(MIN(b.tarifa_base_de_alquiler),2) AS tarifa_min,
+    ROUND(MAX(b.tarifa_base_de_alquiler),2) AS tarifa_max
+FROM bicicletas b
+JOIN tipos_de_uso tdu ON tdu.id_tipo_de_uso = b.id_tipo_de_uso
+WHERE b.activo = 1
 GROUP BY tdu.nombre;
 GO
 
-
--- 2. info_rutas_turisticas
+-- 2. Información sobre rutas turisticas
 CREATE OR ALTER VIEW info_rutas_turisticas AS
 SELECT
-	rt.nombre AS Nombre_Ruta,
-    COUNT(pdi.id_punto_de_interes) AS Cantidad_Puntos_de_Interes,
-    rt.distancia_total_km AS Distancia_Kilometros,
-    rt.distancia_total_mi AS Distancia_Millas,
-    nd.nombre AS Dificultad
+	rt.nombre AS nombre_Ruta,
+    COUNT(pdi.id_punto_de_interes) AS cantidad_Puntos_de_Interes,
+    rt.distancia_total_km AS distancia_Kilometros,
+    rt.distancia_total_mi AS distancia_Millas,
+    nd.nombre AS dificultad
 FROM rutas_turisticas rt
 JOIN niveles_dificultad nd ON rt.id_nivel_dificultad = nd.id_nivel_dificultad
 JOIN puntos_de_interes_de_las_rutas pdir ON rt.id_ruta_turistica = pdir.id_ruta_turistica
 JOIN puntos_de_interes pdi ON pdir.id_punto_de_interes = pdi.id_punto_de_interes
+WHERE rt.activo = 1 AND pdir.activo = 1
 GROUP BY rt.nombre, rt.distancia_total_km, rt.distancia_total_mi, nd.nombre;
 GO
 
-
--- 3. Alquileres_Activos
-CREATE OR ALTER VIEW Alquileres_Activos AS
+-- 3. Alquileres activos
+CREATE OR ALTER VIEW alquileres_activos AS
 SELECT 
-    a.id_alquiler AS ID,
-    a.fecha_de_inicio_de_vigencia AS Fecha_Inicio,
-    a.fecha_de_fin_de_vigencia AS Fecha_Fin,
-    CASE pdla.id_plan
-		WHEN 1 THEN 'Una hora'
-		WHEN 2 THEN 'Un día'
-		WHEN 3 THEN 'Tres días'
-		WHEN 4 THEN 'Cinco días'
-		WHEN 5 THEN 'Una semana'
-		WHEN 6 THEN 'Un mes'
-		WHEN 7 THEN 'Un año'
-	END	
-	AS Duracion,
-    p.primer_nombre + ' ' + p.primer_apellido AS Nombre_usuario,
-    bici.modelo AS Modelo_bicicleta,
-    m.nombre AS Marca,
-    pdla.tipo_de_plan AS Tipo_de_Plan
+    a.id_alquiler,
+    pdla.tipo_de_plan AS tipo_de_Plan,
+    a.fecha_de_inicio_de_vigencia,
+    a.fecha_de_fin_de_vigencia,
+    p.primer_nombre + ' ' + p.primer_apellido AS nombre_usuario,
+    b.id_bicicleta,
+    b.modelo AS modelo_bicicleta,
+    m.nombre AS marca
 FROM alquileres a
 INNER JOIN usuarios u ON a.id_usuario = u.id_persona
 INNER JOIN personas p ON u.id_persona = p.id_persona
-INNER JOIN bicicletas bici ON a.id_bicicleta = bici.id_bicicleta
-INNER JOIN marcas m ON bici.id_marca = m.id_marca
+INNER JOIN bicicletas b ON a.id_bicicleta = b.id_bicicleta
+INNER JOIN marcas m ON b.id_marca = m.id_marca
 INNER JOIN planes_de_los_alquileres pdla ON a.id_plan = pdla.id_plan
 WHERE CAST(GETDATE() AS DATE) BETWEEN a.fecha_de_inicio_de_vigencia 
-      AND a.fecha_de_fin_de_vigencia;
+      AND a.fecha_de_fin_de_vigencia
+      AND u.activo = 1
+      AND p.activo = 1
+      AND b.activo = 1
+      AND pdla.activo = 1;
 GO
-
-
 
 /* ============================================================
    SECCIÓN B — CTE + AGREGACIÓN AVANZADA
 ============================================================ */
 
--- 4. Reportes_Mensuales
-CREATE OR ALTER VIEW Reportes_Mensuales AS
-WITH Estadisticas_Mensuales AS (
-    SELECT 
-        FORMAT(a.fecha_de_inicio_de_vigencia, 'yyyy-MM') AS Fecha,
-        DATENAME(MONTH, a.fecha_de_inicio_de_vigencia) AS Mes,
-        COUNT(*) AS Cantidad_alquileres,
-        SUM(a.tarifa_total) AS Total_facturado,
-        AVG(a.tarifa_total) AS Tarifa_promedio,
-        MAX(a.tarifa_total) AS Tarifa_maxima,
-        MIN(a.tarifa_total) AS Tarifa_minima,
+-- 4. Reportes mensuales
+CREATE OR ALTER VIEW reportes_mensuales AS
+WITH estadisticas_mensuales AS (
+    SELECT
+        FORMAT(a.fecha_de_inicio_de_vigencia, 'yyyy') AS año,
+        FORMAT(a.fecha_de_inicio_de_vigencia, 'MMMM', 'es-ES') AS mes,
+        COUNT(*) AS cantidad_alquileres,
+        ROUND(SUM(a.tarifa_total),2) AS total_facturado,
+        ROUND(AVG(a.tarifa_total),2) AS tarifa_promedio,
+        ROUND(MAX(a.tarifa_total),2) AS tarifa_maxima,
+        ROUND(MIN(a.tarifa_total),2) AS tarifa_minima,
         COUNT(DISTINCT a.id_plan) AS cantidad_planes_diferentes,
         COUNT(DISTINCT a.id_usuario) AS usuarios_unicos,
         COUNT(DISTINCT a.id_bicicleta) AS bicicletas_utilizadas
@@ -92,11 +85,12 @@ WITH Estadisticas_Mensuales AS (
         YEAR(a.fecha_de_inicio_de_vigencia),
         MONTH(a.fecha_de_inicio_de_vigencia),
         DATENAME(MONTH, a.fecha_de_inicio_de_vigencia),
-        FORMAT(a.fecha_de_inicio_de_vigencia, 'yyyy-MM')
+        FORMAT(a.fecha_de_inicio_de_vigencia, 'yyyy'),
+        FORMAT(a.fecha_de_inicio_de_vigencia, 'MMMM', 'es-ES')
 )
-SELECT 
-    Fecha,
-    Mes,
+SELECT
+    año,
+    mes,
     cantidad_alquileres, 
     total_facturado, 
     tarifa_promedio, 
@@ -105,71 +99,46 @@ SELECT
     cantidad_planes_diferentes,
     usuarios_unicos,
     bicicletas_utilizadas,
-    CAST(total_facturado / cantidad_alquileres AS DECIMAL(10,2)) AS Ingreso_por_Alquiler,
-    CAST(usuarios_unicos * 100.0 / cantidad_alquileres AS DECIMAL(10,2)) AS Porcentaje_Usuarios_Unicos
-FROM Estadisticas_Mensuales;
+    CAST(total_facturado / cantidad_alquileres AS DECIMAL(10,2)) AS ingreso_promedio_por_Alquiler,
+    CAST(usuarios_unicos * 100.0 / cantidad_alquileres AS DECIMAL(10,2)) AS porcentaje_usuarios_unicos
+FROM estadisticas_Mensuales;
 GO
 
-
-
--- 5. Info_Bicicletas_En_Desuso
-CREATE OR ALTER VIEW Info_Bicicletas_En_Desuso AS
-WITH UltimaRentaPorBicicleta AS (
-    SELECT 
-        id_bicicleta,
-        MAX(fecha_de_inicio_de_vigencia) AS ultima_fecha_renta
-    FROM alquileres
+-- 5. Información sobre la actividad de las bicicletas
+CREATE OR ALTER VIEW informacion_actividad_bicicletas AS
+WITH ultima_renta_por_bicicleta AS (
+    SELECT id_bicicleta,
+    MAX(fecha_de_fin_de_vigencia) AS fecha_fin_ultimo_alquiler, 
+    CASE
+        WHEN MAX(fecha_de_fin_de_vigencia) >= GETDATE() THEN 0
+        ELSE DATEDIFF(DAY, MAX(fecha_de_fin_de_vigencia), GETDATE())
+    END AS dias_desde_fin_ultimo_alquiler
+    FROM alquileres a
     GROUP BY id_bicicleta
-),
-BicicletasInactivas AS (
-    SELECT 
-        b.id_bicicleta,
-        b.modelo,
-        b.numero_de_cuadro,
-        m.nombre AS marca,
-        b.anio_de_fabricacion,
-        b.kilometraje_km,
-        b.horas_de_uso,
-        pa.nombre AS punto_alquiler_actual,
-        c.nombre AS ciudad_actual,
-        d.nombre AS departamento_actual,
-        ur.ultima_fecha_renta,
-        DATEDIFF(DAY, ur.ultima_fecha_renta, GETDATE()) AS dias_inactiva,
-        edb.nombre AS estado_disponibilidad_actual,
-        (SELECT MAX(fecha_de_fin) 
-         FROM mantenimientos m 
-         WHERE m.id_bicicleta = b.id_bicicleta) AS ultimo_mantenimiento
-    FROM bicicletas b
-    INNER JOIN marcas m ON b.id_marca = m.id_marca
-    INNER JOIN puntos_de_alquiler pa ON b.id_punto_de_alquiler = pa.id_punto_alquiler
-    INNER JOIN ciudades c ON pa.id_ciudad = c.id_ciudad
-    INNER JOIN departamentos d ON c.id_departamento = d.id_departamento
-    LEFT JOIN UltimaRentaPorBicicleta ur ON b.id_bicicleta = ur.id_bicicleta
-    LEFT JOIN (
-        SELECT 
-            id_bicicleta,
-            id_estado_de_disponibilidad_de_la_bicicleta
-        FROM disponibilidades_tomadas_por_las_bicicletas
-        WHERE fecha_fin_del_estado IS NULL
-    ) dt ON b.id_bicicleta = dt.id_bicicleta
-    LEFT JOIN estados_de_disponibilidad_de_las_bicicletas edb 
-        ON dt.id_estado_de_disponibilidad_de_la_bicicleta = edb.id_estado_de_disponibilidad_de_la_bicicleta
-    WHERE b.activo = 1
-      AND (ur.ultima_fecha_renta IS NULL OR DATEDIFF(DAY, ur.ultima_fecha_renta, GETDATE()) > 30)
 )
-SELECT 
-    *,
-    CASE 
-        WHEN dias_inactiva IS NULL THEN 'Nunca rentada'
-        WHEN dias_inactiva > 90 THEN 'Inactividad CRÍTICA'
-        WHEN dias_inactiva > 60 THEN 'Inactividad ALTA'
-        WHEN dias_inactiva > 30 THEN 'Inactividad MEDIA'
-        ELSE 'Inactividad BAJA'
-    END AS nivel_inactividad
-FROM BicicletasInactivas;
+SELECT b.id_bicicleta, 
+b.modelo, 
+b.numero_de_cuadro, 
+m.nombre AS marca,
+b.kilometraje_km, 
+b.horas_de_uso, 
+b.id_punto_de_alquiler, 
+urb.fecha_fin_ultimo_alquiler,
+urb.dias_desde_fin_ultimo_alquiler,
+CASE
+    WHEN urb.dias_desde_fin_ultimo_alquiler >= 200 THEN 'inactividad CRITICA'
+    WHEN urb.dias_desde_fin_ultimo_alquiler >= 150 THEN 'inactividad grave'
+    WHEN urb.dias_desde_fin_ultimo_alquiler >= 100 THEN 'inactividad alta'
+    WHEN urb.dias_desde_fin_ultimo_alquiler >= 50 THEN 'inactividad moderada'
+    WHEN urb.dias_desde_fin_ultimo_alquiler >= 25 THEN 'inactividad baja'
+    WHEN urb.dias_desde_fin_ultimo_alquiler >= 0 THEN 'actividad reciente'
+    ELSE 'nunca fue alquilada'
+END AS estado_actividad
+FROM bicicletas b
+FULL JOIN ultima_renta_por_bicicleta urb ON urb.id_bicicleta = b.id_bicicleta
+JOIN marcas m ON b.id_marca = m.id_marca
+WHERE b.activo = 1;
 GO
-
-
 
 /* ============================================================
    SECCIÓN C — OPERACIONES DE CONJUNTO

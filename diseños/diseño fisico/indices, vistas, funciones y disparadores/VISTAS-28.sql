@@ -137,10 +137,12 @@ CREATE OR ALTER VIEW bicicletas_han_tenido_mantenimiento AS
 SELECT DISTINCT b.id_bicicleta, b.modelo, 'Ha tenido mantenimiento' AS estado, MAX(m.fecha_de_inicio) AS fecha_de_inicio_ultimo_mantenimiento, MAX(m.fecha_de_fin) AS fecha_de_fin_ultimo_mantenimiento
 FROM mantenimientos m
 JOIN bicicletas b ON m.id_bicicleta = b.id_bicicleta
+WHERE b.activo = 1
 GROUP BY b.id_bicicleta, b.modelo
 UNION
 SELECT b.id_bicicleta, b.modelo, 'No ha tenido mantenimiento' AS estado, NULL, NULL
 FROM bicicletas b
+WHERE b.activo = 1
 EXCEPT
 SELECT DISTINCT m.id_bicicleta, b.modelo, 'No ha tenido mantenimiento' AS estado, NULL, NULL
 FROM mantenimientos m
